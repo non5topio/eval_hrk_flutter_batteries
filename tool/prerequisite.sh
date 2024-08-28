@@ -14,12 +14,11 @@ if (( BASH_VERSINFO[0] < 5 )); then
   bash --version
 fi
 
-# shellcheck disable=SC1090
-source <(curl -s https://raw.githubusercontent.com/hrishikesh-kadam/common-scripts/main/logs/logs-env-posix.sh)
+source ./tool/shell/logs-env.sh
 
 check_command_on_path() {
   if [[ ! -x $(command -v "$1") ]]; then
-    error_log_with_exit "$1 command not accessible from PATH" 1
+    log_error_with_exit "$1 command not accessible from PATH" 1
   fi
 }
 
@@ -29,11 +28,14 @@ check_directory_on_path() {
     directory=$(cygpath "$directory")
   fi
   if [[ ! $PATH =~ $directory ]]; then
-    error_log_with_exit "$1 directory not found on PATH" 1
+    log_error_with_exit "$1 directory not found on PATH" 1
   fi
 }
 
 check_command_on_path flutter
+if ! export -p | grep -q "declare -x FLUTTER_ROOT="; then
+  log_error_with_exit "FLUTTER_ROOT exported variable not found"
+fi
 
 if [[ $(uname -s) =~ ^"Darwin" ]]; then
   check_command_on_path brew
@@ -61,11 +63,16 @@ if [[ ! -x $(command -v lcov) ]]; then
         PATH="$LCOV_ROOT_NIX:$PATH"
       else
         # Deliberately avoiding to set PATH by setx command
-        error_log_with_exit "$LCOV_ROOT_NIX directory not found on PATH" 1
+        log_error_with_exit "$LCOV_ROOT_NIX directory not found on PATH" 1
       fi
     fi
   fi
   lcov --version
+fi
+
+if [[ $(uname -s) =~ ^"Linux" ]]; then
+  # https://docs.flutter.dev/get-started/install/linux#additional-linux-requirements
+  sudo apt install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
 fi
 
 print_in_green "Pre-requisite fulfilled"

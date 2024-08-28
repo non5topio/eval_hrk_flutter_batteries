@@ -1,24 +1,34 @@
 name: hrk_flutter_batteries
-version: 0.1.0
+version: 0.1.0-pre.1
 
 description: >-
-  A library to accumulate required flutter helper and utility codes
+  A library to accumulate required flutter Widgets, Helper, Utility codes.
 repository: https://github.com/hrishikesh-kadam/hrk_flutter_batteries
 topics:
   - batteries
   - flutter-batteries
 
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: ^3.0.0
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  hrk_batteries: ^1.0.0
+  json_annotation: ^4.9.0
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hrk_analysis: ^0.2.0
+  hrk_analysis: ^1.0.0
+  import_sorter:
+    git:
+      url: https://github.com/fluttercommunity/import_sorter.git
+      ref: 641f363d40a4ffb42ab577a43433fc48c5059b19
 
-flutter:
+import_sorter:
+  comments: false
+  ignored_files:
+    - '.*\.mocks\.dart'

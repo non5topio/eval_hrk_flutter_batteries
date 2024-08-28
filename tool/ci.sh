@@ -2,19 +2,21 @@
 
 set -e -o pipefail
 
-flutter create --template=package .
+tool/create.sh
 
-flutter pub get
+tool/format-analyze.sh
 
-dart format --output none --set-exit-if-changed .
-
-flutter analyze
-
-# tool/test.sh
+tool/test.sh
 
 dart pub global activate pana
-dart pub global run pana
+dart pub global run pana --no-warning
 
 dart pub publish --dry-run
 
-git status --short
+git diff --stat
+git --no-pager diff
+if flutter --version | grep -q "channel stable" &> /dev/null; then
+  git diff --exit-code -- \
+    ':(exclude)playground_app/.metadata' \
+    &> /dev/null
+fi

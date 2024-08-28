@@ -19,5 +19,13 @@ updates:
       time: "12:00"
       timezone: "Asia/Kolkata"
 
+  - package-ecosystem: "pub"
+    directory: "/playground_app"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+      time: "12:00"
+      timezone: "Asia/Kolkata"
+
 # To search in PR for ignored dependencies
 # is:pr commenter:hrishikesh-kadam "@dependabot ignore" in:comments
