@@ -1,3 +1,7 @@
+## 0.1.0-pre.3
+
+- Add `HrkColorScheme.surfaceFixed`
+
 ## 0.1.0-pre.2
 
 - Prepare RadioSettingsTile, RadioDialog

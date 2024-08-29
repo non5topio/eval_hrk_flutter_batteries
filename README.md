@@ -15,6 +15,9 @@ A library to accumulate required flutter Widgets, Helper, Utility codes.
   - [`HrkColors`]
   - [`LocaleJsonConverter`]
   - [`LocaleListJsonConverter`]
+- Extensions
+  - [`HrkColorScheme`]
+    - [`surfaceFixed`]
 
 ## Getting started
 
@@ -43,6 +46,8 @@ See the following folders for the respective examples in detail:
 [`HrkColors`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColors-class.html
 [`LocaleJsonConverter`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleJsonConverter-class.html
 [`LocaleListJsonConverter`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleListJsonConverter-class.html
+[`HrkColorScheme`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColorScheme.html
+[`surfaceFixed`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColorScheme/surfaceFixed.html
 [playground_app/lib/route]: playground_app/lib/route
 [test/unit_test]: test/unit_test
 [playground_app/test/widget_test]: playground_app/test/widget_test
