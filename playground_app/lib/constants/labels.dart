@@ -5,5 +5,5 @@ class Labels {
   static const String pageNotFound = 'Page Not Found';
   static const String about = 'About';
   static const String licenses = 'Licenses';
-  static const String labelLinkInkwellWrap = 'Label Link InkWell Wrap';
+  static const String labelLinkInkwellWrapCN = 'LabelLinkInkWellWrap';
 }

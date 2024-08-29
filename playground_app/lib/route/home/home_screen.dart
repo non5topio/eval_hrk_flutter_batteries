@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
             builder: (context, followLink) {
               return FilledButton(
                 child: Text(
-                  Labels.labelLinkInkwellWrap,
+                  Labels.labelLinkInkwellWrapCN,
                   textAlign: TextAlign.center,
                   style: themeData.textTheme.bodyMedium?.copyWith(
                     color: themeData.colorScheme.onPrimary,

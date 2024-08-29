@@ -34,7 +34,7 @@ RouteBase get $homeRoute => GoRouteData.$route(
         ),
         GoRouteData.$route(
           path: 'label-link-inkwell-wrap',
-          name: 'Label Link InkWell Wrap',
+          name: 'LabelLinkInkWellWrap',
           factory: $LabelLinkInkWellWrapRouteExtension._fromState,
         ),
       ],

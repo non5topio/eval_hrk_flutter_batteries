@@ -20,7 +20,7 @@ class LabelLinkInkWellWrapRoute extends GoRouteData {
 
   static const String pathSegment = 'label-link-inkwell-wrap';
   static final Uri uri = Uri(path: '/$pathSegment');
-  static const String displayName = Labels.labelLinkInkwellWrap;
+  static const String displayName = Labels.labelLinkInkwellWrapCN;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

@@ -31,14 +31,20 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
   static const Key demo2Key = Key('${keyPrefix}demo_2_key');
   static const Key demo3Key = Key('${keyPrefix}demo_3_key');
   static const Key demo4Key = Key('${keyPrefix}demo_4_key');
+  static const Key demo5Key = Key('${keyPrefix}demo_5_key');
+  static const Key demo6Key = Key('${keyPrefix}demo_6_key');
   static const Key demo1LabelKey = Key('${keyPrefix}demo_1_label_key');
   static const Key demo2LabelKey = Key('${keyPrefix}demo_2_label_key');
   static const Key demo3LabelKey = Key('${keyPrefix}demo_3_label_key');
   static const Key demo4LabelKey = Key('${keyPrefix}demo_4_label_key');
+  static const Key demo5LabelKey = Key('${keyPrefix}demo_5_label_key');
+  static const Key demo6LabelKey = Key('${keyPrefix}demo_6_label_key');
   static const Key demo1LinkKey = Key('${keyPrefix}demo_1_link_key');
   static const Key demo2LinkKey = Key('${keyPrefix}demo_2_link_key');
   static const Key demo3LinkKey = Key('${keyPrefix}demo_3_link_key');
   static const Key demo4LinkKey = Key('${keyPrefix}demo_4_link_key');
+  static const Key demo5LinkKey = Key('${keyPrefix}demo_5_link_key');
+  static const Key demo6LinkKey = Key('${keyPrefix}demo_6_link_key');
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +87,8 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
       _getDemo2(),
       _getDemo3(),
       _getDemo4(),
+      _getDemo5(),
+      _getDemo6(),
     ];
   }
 
@@ -95,31 +103,39 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
     );
   }
 
-  // With preFollowLink
+  // Wrapped in two lines
   Widget _getDemo2() {
-    return LabelLinkInkWellWrap(
-      key: demo2Key,
-      labelKey: demo2LabelKey,
-      label: l10n.source,
-      uri: Constants.sourceRepoUrl,
-      linkKey: demo2LinkKey,
-      preFollowLink: () async {},
+    return Center(
+      child: SizedBox(
+        width: 400,
+        child: LabelLinkInkWellWrap(
+          key: demo2Key,
+          labelKey: demo2LabelKey,
+          label: l10n.source,
+          uri: Constants.sourceRepoUrl,
+          linkKey: demo2LinkKey,
+        ),
+      ),
     );
   }
 
-  // With customFollowLink
+  // Wrapped in three lines
   Widget _getDemo3() {
-    return LabelLinkInkWellWrap(
-      key: demo3Key,
-      labelKey: demo3LabelKey,
-      label: l10n.source,
-      uri: Constants.sourceRepoUrl,
-      linkKey: demo3LinkKey,
-      customFollowLink: () async {},
+    return Center(
+      child: SizedBox(
+        width: 350,
+        child: LabelLinkInkWellWrap(
+          key: demo3Key,
+          labelKey: demo3LabelKey,
+          label: l10n.source,
+          uri: Constants.sourceRepoUrl,
+          linkKey: demo3LinkKey,
+        ),
+      ),
     );
   }
 
-  // With preFollowLink, customFollowLink
+  // With preFollowLink
   Widget _getDemo4() {
     return LabelLinkInkWellWrap(
       key: demo4Key,
@@ -127,6 +143,30 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
       label: l10n.source,
       uri: Constants.sourceRepoUrl,
       linkKey: demo4LinkKey,
+      preFollowLink: () async {},
+    );
+  }
+
+  // With customFollowLink
+  Widget _getDemo5() {
+    return LabelLinkInkWellWrap(
+      key: demo5Key,
+      labelKey: demo5LabelKey,
+      label: l10n.source,
+      uri: Constants.sourceRepoUrl,
+      linkKey: demo5LinkKey,
+      customFollowLink: () async {},
+    );
+  }
+
+  // With preFollowLink, customFollowLink
+  Widget _getDemo6() {
+    return LabelLinkInkWellWrap(
+      key: demo6Key,
+      labelKey: demo6LabelKey,
+      label: l10n.source,
+      uri: Constants.sourceRepoUrl,
+      linkKey: demo6LinkKey,
       preFollowLink: () async {},
       customFollowLink: () async {},
     );

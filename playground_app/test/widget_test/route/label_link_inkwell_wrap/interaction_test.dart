@@ -11,7 +11,7 @@ void main() {
   group('$LabelLinkInkWellWrap Interaction Test', () {
     testWidgets('No interaction', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      const demoWidgetsCount = 4;
+      const demoWidgetsCount = 6;
       expect(
           find.byType(LabelLinkInkWellWrap), findsNWidgets(demoWidgetsCount));
       final labelFinder = find.descendantText(
@@ -33,17 +33,17 @@ void main() {
 
     testWidgets('With preFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo2LinkKey));
+      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo4LinkKey));
     });
 
     testWidgets('With customFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo3LinkKey));
+      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo5LinkKey));
     });
 
     testWidgets('With preFollowLink, customFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo4LinkKey));
+      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo6LinkKey));
     });
   });
 }
