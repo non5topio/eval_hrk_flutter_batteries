@@ -8,7 +8,6 @@ import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 
 import '../../constants/constants.dart';
-import '../../constants/dimensions.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 
@@ -72,11 +71,11 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
         return scrollableContents[index];
       },
       separatorBuilder: (context, index) {
-        return const SizedBox(height: Dimensions.bodyItemSpacer);
+        return const SizedBox(height: HrkDimensions.bodyItemSpacing);
       },
       padding: const EdgeInsets.symmetric(
-        vertical: 16,
-        horizontal: 16,
+        vertical: HrkDimensions.pageMarginVertical,
+        horizontal: HrkDimensions.pageMarginHorizontal,
       ),
     );
   }

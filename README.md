@@ -8,13 +8,18 @@ A library to accumulate required flutter Widgets, Helper, Utility codes.
 
 - Widgets
   - [`LabelLinkInkWellWrap`]
+  - [`LabelValueWrap`]
   - [`RadioSettingsTile`]
   - [`RadioDialog`]
   - [`DeferredWidget`]
 - Helper, Utility codes
+  - [`HrkDimensions`]
   - [`HrkColors`]
   - [`LocaleJsonConverter`]
   - [`LocaleListJsonConverter`]
+  - Text Helper
+    - [`getTextPainterLaidout()`]
+    - [`getLargestTextWidth()`]
 - Extensions
   - [`HrkColorScheme`]
     - [`surfaceFixed`]
@@ -40,12 +45,16 @@ See the following folders for the respective examples in detail:
 [codecov-badge]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries/branch/main/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries
 [`LabelLinkInkWellWrap`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LabelLinkInkWellWrap-class.html
+[`LabelValueWrap`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LabelValueWrap-class.html
 [`RadioSettingsTile`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/RadioSettingsTile-class.html
 [`RadioDialog`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/RadioDialog-class.html
 [`DeferredWidget`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/DeferredWidget-class.html
+[`HrkDimensions`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkDimensions-class.html
 [`HrkColors`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColors-class.html
 [`LocaleJsonConverter`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleJsonConverter-class.html
 [`LocaleListJsonConverter`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleListJsonConverter-class.html
+[`getTextPainterLaidout()`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/getTextPainterLaidout.html
+[`getLargestTextWidth()`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/getLargestTextWidth.html
 [`HrkColorScheme`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColorScheme.html
 [`surfaceFixed`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColorScheme/surfaceFixed.html
 [playground_app/lib/route]: playground_app/lib/route

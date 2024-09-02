@@ -2,10 +2,12 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+// TODO(hrishikesh-kadam): Move this to hrk_flutter_test_batteries
 // LABEL: eligible-hrk_flutter_test_batteries
 extension HrkFinders on CommonFinders {
   Finder byKeyStartsWith(
-    String keyPrefix, {
+    Pattern pattern, {
+    int index = 0,
     String? description,
     bool skipOffstage = true,
   }) {
@@ -13,7 +15,7 @@ extension HrkFinders on CommonFinders {
       (widget) {
         if (widget.key is ValueKey<String>) {
           final key = widget.key as ValueKey<String>;
-          if (key.value.startsWith(keyPrefix)) {
+          if (key.value.startsWith(pattern, index)) {
             return true;
           }
         }

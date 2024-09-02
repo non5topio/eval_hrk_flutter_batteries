@@ -1,10 +1,20 @@
+## 0.1.0-pre.4
+
+- Add:
+  - `LabelValueWrap`
+  - `getTextPainterLaidout()`
+  - `getLargestTextWidth()`
+  - `BodyItemContainer`
+  - `HrkDimensions`
+- Bump hrk_batteries to ^2.0.0
+
 ## 0.1.0-pre.3
 
 - Add `HrkColorScheme.surfaceFixed`
 
 ## 0.1.0-pre.2
 
-- Prepare RadioSettingsTile, RadioDialog
+- Prepare `RadioSettingsTile`, `RadioDialog`
 - Fix src export
 
 ## 0.1.0-pre.1

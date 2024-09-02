@@ -1,4 +1,6 @@
-// ignore_for_file: avoid_print, directives_ordering
+// ignore_for_file: directives_ordering
+
+import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
@@ -61,19 +63,19 @@ void main() {
     });
 
     test('surfaceFixed closeTo delta', () {
-      final List<Color> seedColors = [
+      final Set<Color> seedColors = {
         HrkColors.flutterBlue,
         HrkColors.flutterNavy,
         HrkColors.flutterSky,
         ...Colors.primaries,
         ...Colors.accents,
-      ];
-      final List<num> redDeltaPercents = [];
-      final List<num> greenDeltaPercents = [];
-      final List<num> bluePercents = [];
-      final List<num> huePercents = [];
-      final List<num> chromaPercents = [];
-      final List<num> tonePercents = [];
+      };
+      final redDeltaPercents = SplayTreeSet<num>();
+      final greenDeltaPercents = SplayTreeSet<num>();
+      final bluePercents = SplayTreeSet<num>();
+      final huePercents = SplayTreeSet<num>();
+      final chromaPercents = SplayTreeSet<num>();
+      final tonePercents = SplayTreeSet<num>();
       for (final seedColor in seedColors) {
         final colorSchemeLight = ColorScheme.fromSeed(
           seedColor: seedColor,
@@ -114,30 +116,21 @@ void main() {
           (surfaceFixedHctLight.tone - surfaceFixedHctDark.tone).abs() / 360,
         );
       }
-      redDeltaPercents.sort();
-      greenDeltaPercents.sort();
-      bluePercents.sort();
-      huePercents.sort();
-      chromaPercents.sort();
-      tonePercents.sort();
-      print('redDeltaPercent max: ${redDeltaPercents.last.toStringAsFixed(5)}');
-      print(
-          'greenDeltaPercent max: ${greenDeltaPercents.last.toStringAsFixed(5)}');
-      print('blueDeltaPercent max: ${bluePercents.last.toStringAsFixed(5)}');
-      print('hueDeltaPercent max: ${huePercents.last.toStringAsFixed(5)}');
-      print(
-          'chromaDeltaPercent max: ${chromaPercents.last.toStringAsFixed(5)}');
-      print('toneDeltaPercent max: ${tonePercents.last.toStringAsFixed(5)}');
-      final List<num> maxDeltaPercents = [
-        redDeltaPercents.last,
-        greenDeltaPercents.last,
-        bluePercents.last,
-        huePercents.last,
-        chromaPercents.last,
-        tonePercents.last,
-      ];
-      maxDeltaPercents.sort();
-      print('maxDeltaPercent max: ${maxDeltaPercents.last.toStringAsFixed(5)}');
-    }, skip: true);
+      // print('redDeltaPercent max: ${redDeltaPercents.last.toStringAsFixed(5)}');
+      // print('greenDeltaPercent max: ${greenDeltaPercents.last.toStringAsFixed(5)}');
+      // print('blueDeltaPercent max: ${bluePercents.last.toStringAsFixed(5)}');
+      // print('hueDeltaPercent max: ${huePercents.last.toStringAsFixed(5)}');
+      // print('chromaDeltaPercent max: ${chromaPercents.last.toStringAsFixed(5)}');
+      // print('toneDeltaPercent max: ${tonePercents.last.toStringAsFixed(5)}');
+      final maxDeltaPercents = SplayTreeSet<num>();
+      maxDeltaPercents.add(redDeltaPercents.last);
+      maxDeltaPercents.add(greenDeltaPercents.last);
+      maxDeltaPercents.add(bluePercents.last);
+      maxDeltaPercents.add(huePercents.last);
+      maxDeltaPercents.add(chromaPercents.last);
+      maxDeltaPercents.add(tonePercents.last);
+      // print('maxDeltaPercent max: ${maxDeltaPercents.last.toStringAsFixed(5)}');
+      expect(maxDeltaPercents.last.toStringAsFixed(5), '0.06476');
+    });
   });
 }

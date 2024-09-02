@@ -7,6 +7,7 @@ import '../../constants/labels.dart';
 import '../about/about_route.dart';
 import '../about/license/license_route.dart';
 import '../label_link_inkwell_wrap/label_link_inkwell_wrap_route.dart';
+import '../label_value_wrap/label_value_wrap_route.dart';
 import '../settings/settings_route.dart';
 import 'home_screen.dart';
 
@@ -33,6 +34,10 @@ part 'home_route.g.dart';
     TypedGoRoute<LabelLinkInkWellWrapRoute>(
       path: LabelLinkInkWellWrapRoute.pathSegment,
       name: LabelLinkInkWellWrapRoute.displayName,
+    ),
+    TypedGoRoute<LabelValueWrapRoute>(
+      path: LabelValueWrapRoute.pathSegment,
+      name: LabelValueWrapRoute.displayName,
     ),
   ],
 )

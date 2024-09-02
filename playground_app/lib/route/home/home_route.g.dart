@@ -37,6 +37,11 @@ RouteBase get $homeRoute => GoRouteData.$route(
           name: 'LabelLinkInkWellWrap',
           factory: $LabelLinkInkWellWrapRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'label-value-wrap',
+          name: 'LabelValueWrap',
+          factory: $LabelValueWrapRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -116,6 +121,28 @@ extension $LabelLinkInkWellWrapRouteExtension on LabelLinkInkWellWrapRoute {
 
   String get location => GoRouteData.$location(
         '/label-link-inkwell-wrap',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
+
+extension $LabelValueWrapRouteExtension on LabelValueWrapRoute {
+  static LabelValueWrapRoute _fromState(GoRouterState state) =>
+      LabelValueWrapRoute(
+        $extra: state.extra as Map<String, dynamic>?,
+      );
+
+  String get location => GoRouteData.$location(
+        '/label-value-wrap',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);

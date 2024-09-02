@@ -16,7 +16,6 @@ dart pub publish --dry-run
 git diff --stat
 git --no-pager diff
 if flutter --version | grep -q "channel stable" &> /dev/null; then
-  git diff --exit-code -- \
-    ':(exclude)playground_app/.metadata' \
-    &> /dev/null
+  git diff --exit-code  --quiet \
+    ':(exclude)playground_app/.metadata'
 fi

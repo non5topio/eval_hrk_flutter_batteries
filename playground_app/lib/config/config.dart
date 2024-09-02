@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -75,18 +76,7 @@ String getPreReleaseVersion() {
   if (prodRelease) {
     return '';
   } else {
-    return '${flavorEnv.name}-${getBuildMode()}';
-  }
-}
-
-// LABEL: eligible-hrk_batteries
-String getBuildMode() {
-  if (kReleaseMode) {
-    return 'release';
-  } else if (kProfileMode) {
-    return 'profile';
-  } else {
-    return 'debug';
+    return '${flavorEnv.name}-${getBuildModeString()}';
   }
 }
 

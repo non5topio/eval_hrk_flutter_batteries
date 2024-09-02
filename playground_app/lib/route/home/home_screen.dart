@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:url_launcher/link.dart';
 
-import '../../constants/dimensions.dart';
 import '../../constants/labels.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 import '../label_link_inkwell_wrap/label_link_inkwell_wrap_route.dart';
+import '../label_value_wrap/label_value_wrap_route.dart';
 import 'home_route.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,13 +54,14 @@ class HomeScreen extends StatelessWidget {
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
       _getLabelLinkInkWellWrap(context: context),
+      _getLabelValueWrap(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
-          bottom: Dimensions.pageMarginVerticalHalf,
+          bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       )
     ];
@@ -69,8 +71,8 @@ class HomeScreen extends StatelessWidget {
     final themeData = Theme.of(context);
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
-        horizontal: Dimensions.pageMarginHorizontal,
-        vertical: Dimensions.pageMarginVerticalHalf,
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
       ),
       sliver: SliverToBoxAdapter(
         child: Center(
@@ -88,6 +90,37 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   LabelLinkInkWellWrapRoute($extra: getRouteExtraMap())
                       .go(context);
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _getLabelValueWrap({required BuildContext context}) {
+    final themeData = Theme.of(context);
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Center(
+          child: Link(
+            uri: LabelValueWrapRoute.uri,
+            builder: (context, followLink) {
+              return FilledButton(
+                child: Text(
+                  Labels.labelValueWrapCN,
+                  textAlign: TextAlign.center,
+                  style: themeData.textTheme.bodyMedium?.copyWith(
+                    color: themeData.colorScheme.onPrimary,
+                  ),
+                ),
+                onPressed: () {
+                  LabelValueWrapRoute($extra: getRouteExtraMap()).go(context);
                 },
               );
             },

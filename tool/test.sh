@@ -10,6 +10,12 @@ flutter test test/unit_test \
 # lcov --list coverage/package/unit_test_lcov.info \
 #   | grep -v ".*|.*100%.*|.*|"
 
+flutter test test/widget_test \
+  --coverage \
+  --coverage-path coverage/package/widget_test_lcov.info
+# lcov --list coverage/package/widget_test_lcov.info \
+#   | grep -v ".*|.*100%.*|.*|"
+
 pushd playground_app &> /dev/null
 
 if (( $(git status -s pubspec.yaml | wc -l) > 0 )); then
@@ -38,6 +44,7 @@ sed -i 's/SF:..\//SF:/g' coverage/playground_app/widget_test_lcov.info
 #   | grep -v ".*|.*100%.*|.*|"
 
 lcov --add-tracefile coverage/package/unit_test_lcov.info \
+  --add-tracefile coverage/package/widget_test_lcov.info \
   --add-tracefile coverage/playground_app/widget_test_lcov.info \
   --output-file coverage/lcov.info
 

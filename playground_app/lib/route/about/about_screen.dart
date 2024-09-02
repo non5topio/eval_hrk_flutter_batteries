@@ -9,7 +9,6 @@ import 'package:url_launcher/link.dart';
 
 import '../../config/config.dart';
 import '../../constants/constants.dart';
-import '../../constants/dimensions.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 
@@ -58,7 +57,7 @@ class AboutScreen extends StatelessWidget {
         return scrollableContents[index];
       },
       separatorBuilder: (context, index) {
-        return const SizedBox(height: Dimensions.bodyItemSpacer);
+        return const SizedBox(height: HrkDimensions.bodyItemSpacing);
       },
       padding: const EdgeInsets.symmetric(
         vertical: 16,

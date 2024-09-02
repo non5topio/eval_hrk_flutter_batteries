@@ -6,4 +6,7 @@ class Labels {
   static const String about = 'About';
   static const String licenses = 'Licenses';
   static const String labelLinkInkwellWrapCN = 'LabelLinkInkWellWrap';
+  static const String labelValueWrapCN = 'LabelValueWrap';
+  static const String tdb = 'TDB';
+  static const String na = 'NA';
 }
