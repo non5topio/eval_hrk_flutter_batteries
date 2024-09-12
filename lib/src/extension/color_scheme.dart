@@ -10,6 +10,8 @@ extension HrkColorScheme on ColorScheme {
   /// It might differ less than 6.5%. </br>
   /// See: test/unit_test/extension/color_scheme_test.dart
   Color get surfaceFixed {
+    // TODO(hrishikesh-kadam): Fix these everywhere once the deprecations are in stable
+    // ignore: deprecated_member_use
     final Hct surfaceHct = Hct.fromInt(surface.value);
     final Hct surfaceFixedHct = Hct.from(
       surfaceHct.hue,
