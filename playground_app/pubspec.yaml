@@ -17,7 +17,7 @@ dependencies:
     sdk: flutter
   intl: any
   cupertino_icons: ^1.0.8
-  hrk_batteries: ^2.0.0
+  hrk_batteries: ^2.1.0
   hrk_flutter_batteries: '>=0.1.0-pre.4 <1.0.0'
   hrk_logging: '>=0.2.0 <1.0.0'
   hrk_nasa_apis: ^1.0.0

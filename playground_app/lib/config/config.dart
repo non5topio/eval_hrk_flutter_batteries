@@ -9,7 +9,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
 import '../constants/constants.dart';
-import '../extension/pubspec.dart';
 import 'app_bloc_observer.dart';
 
 import 'config_non_web.dart' if (dart.library.js_interop) 'config_web.dart'
