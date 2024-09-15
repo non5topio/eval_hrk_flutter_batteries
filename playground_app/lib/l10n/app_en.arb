@@ -1,5 +1,11 @@
 {
   "playgroundApp": "Playground App",
+  "demo0": "Demo 0",
+  "demo1": "Demo 1",
+  "demo2": "Demo 2",
+  "demo3": "Demo 3",
+  "demo4": "Demo 4",
+  "demo5": "Demo 5",
   "search": "Search",
   "minimum": "Minimum",
   "maximum": "Maximum",

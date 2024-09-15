@@ -7,6 +7,7 @@ A library to accumulate required flutter Widgets, Helper, Utility codes.
 ## Features
 
 - Widgets
+  - [`ChoiceChipGroup`]
   - [`LabelLinkInkWellWrap`]
   - [`LabelValueWrap`]
   - [`RadioSettingsTile`]
@@ -44,6 +45,7 @@ See the following folders for the respective examples in detail:
 [pub-link]: https://pub.dev/packages/hrk_flutter_batteries
 [codecov-badge]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries/branch/main/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries
+[`ChoiceChipGroup`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/ChoiceChipGroup-class.html
 [`LabelLinkInkWellWrap`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LabelLinkInkWellWrap-class.html
 [`LabelValueWrap`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LabelValueWrap-class.html
 [`RadioSettingsTile`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/RadioSettingsTile-class.html

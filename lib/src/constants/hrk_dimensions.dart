@@ -13,7 +13,11 @@ class HrkDimensions {
   // 360 - (2×8) - (2×8)
   static const double bodyItemWidth = 328;
   static const double bodyItemBoxWidth = bodyItemWidth + 2 * bodyItemMargin;
+  static const double bodyItemBorderWidth = 1;
+  static const double bodyItemContentWidth =
+      bodyItemWidth - (2 * bodyItemBorderWidth) - (2 * bodyItemPadding);
 
+  // TODO(hrishikesh-kadam): Fix border issue
   // (avgMobileWidth - (4×bodyItemPadding) - (4×bodyItemMargin) - (2×pageMarginHorizontalHalf)) / 2
   // (360 − (4×16) − (4×8) − (2×8)) / 2
   static const double gridItemContentSize = 124;

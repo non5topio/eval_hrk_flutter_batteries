@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../constants/labels.dart';
 import '../about/about_route.dart';
 import '../about/license/license_route.dart';
+import '../choice_chip_group/choice_chip_group_route.dart';
 import '../label_link_inkwell_wrap/label_link_inkwell_wrap_route.dart';
 import '../label_value_wrap/label_value_wrap_route.dart';
 import '../settings/settings_route.dart';
@@ -30,6 +31,10 @@ part 'home_route.g.dart';
           name: LicenseRoute.displayName,
         )
       ],
+    ),
+    TypedGoRoute<ChoiceChipGroupRoute>(
+      path: ChoiceChipGroupRoute.pathSegment,
+      name: ChoiceChipGroupRoute.displayName,
     ),
     TypedGoRoute<LabelLinkInkWellWrapRoute>(
       path: LabelLinkInkWellWrapRoute.pathSegment,

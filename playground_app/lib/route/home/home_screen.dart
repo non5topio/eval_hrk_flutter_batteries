@@ -7,6 +7,7 @@ import 'package:url_launcher/link.dart';
 import '../../constants/labels.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
+import '../choice_chip_group/choice_chip_group_route.dart';
 import '../label_link_inkwell_wrap/label_link_inkwell_wrap_route.dart';
 import '../label_value_wrap/label_value_wrap_route.dart';
 import 'home_route.dart';
@@ -57,6 +58,7 @@ class HomeScreen extends StatelessWidget {
           bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
+      _getChoiceChipGroup(context: context),
       _getLabelLinkInkWellWrap(context: context),
       _getLabelValueWrap(context: context),
       const SliverPadding(
@@ -65,6 +67,37 @@ class HomeScreen extends StatelessWidget {
         ),
       )
     ];
+  }
+
+  Widget _getChoiceChipGroup({required BuildContext context}) {
+    final themeData = Theme.of(context);
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Center(
+          child: Link(
+            uri: ChoiceChipGroupRoute.uri,
+            builder: (context, followLink) {
+              return FilledButton(
+                child: Text(
+                  Labels.choiceChipGroupCN,
+                  textAlign: TextAlign.center,
+                  style: themeData.textTheme.bodyMedium?.copyWith(
+                    color: themeData.colorScheme.onPrimary,
+                  ),
+                ),
+                onPressed: () {
+                  ChoiceChipGroupRoute($extra: getRouteExtraMap()).go(context);
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _getLabelLinkInkWellWrap({required BuildContext context}) {

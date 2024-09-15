@@ -1,3 +1,7 @@
+## 0.1.0
+
+- Add `ChoiceChipGroup`
+
 ## 0.1.0-pre.4
 
 - Add:
