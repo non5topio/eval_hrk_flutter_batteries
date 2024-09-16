@@ -6,19 +6,18 @@ import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 
 import '../../widgets/app_bar.dart';
 
-class ChoiceChipGroupScreen extends StatefulWidget {
-  ChoiceChipGroupScreen({
+class FilterChipGroupScreen extends StatefulWidget {
+  FilterChipGroupScreen({
     super.key,
     required this.title,
     required this.l10n,
     this.routeExtraMap,
   }) {
     demoLabels = {
-      l10n.earth,
-      l10n.moon,
-      l10n.all,
       l10n.mercury,
       l10n.venus,
+      l10n.earth,
+      l10n.moon,
       l10n.mars,
       l10n.jupiter,
       l10n.saturn,
@@ -33,11 +32,10 @@ class ChoiceChipGroupScreen extends StatefulWidget {
   final JsonMap? routeExtraMap;
   late final Set<String> demoLabels;
   static final Set<CloseApproachBody> closeApproachBodySet = {
-    CloseApproachBody.earth,
-    CloseApproachBody.moon,
-    CloseApproachBody.all,
     CloseApproachBody.mercury,
     CloseApproachBody.venus,
+    CloseApproachBody.earth,
+    CloseApproachBody.moon,
     CloseApproachBody.mars,
     CloseApproachBody.jupiter,
     CloseApproachBody.saturn,
@@ -45,16 +43,22 @@ class ChoiceChipGroupScreen extends StatefulWidget {
     CloseApproachBody.neptune,
     CloseApproachBody.pluto,
   };
-  static const CloseApproachBody defaultSelection = CloseApproachBody.all;
-  static final int defaultSelectionIndex =
-      closeApproachBodySet.toList().indexOf(defaultSelection);
+  static const Set<CloseApproachBody> defaultSelectionSet = {
+    CloseApproachBody.earth,
+    CloseApproachBody.moon,
+  };
+  static final Set<int> defaultSelectionIndex = {
+    ...defaultSelectionSet.map((e) {
+      return closeApproachBodySet.toList().indexOf(e);
+    }),
+  };
   final Set<String> demoKeys = closeApproachBodySet.map((e) => e.name).toSet();
-  static const String keyPrefix = 'choice_chip_group_screen_';
+  static const String keyPrefix = 'filter_chip_group_screen_';
   static const Key customScrollViewKey = Key('${keyPrefix}scroll_view_key');
   static const String demoKeyPrefix = '${keyPrefix}demo_';
 
   @override
-  State<ChoiceChipGroupScreen> createState() => _ChoiceChipGroupScreenState();
+  State<FilterChipGroupScreen> createState() => _FilterChipGroupScreenState();
 
   static String getDemoKeyPrefix(int index) {
     return '$demoKeyPrefix${index}_';
@@ -65,20 +69,22 @@ class ChoiceChipGroupScreen extends StatefulWidget {
   }
 }
 
-class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
-  CloseApproachBody? demo0Selection;
-  CloseApproachBody? demo1Selection;
-  CloseApproachBody? demo2Selection;
-  CloseApproachBody? demo3Selection;
-  CloseApproachBody? demo4Selection;
-  CloseApproachBody? demo5Selection;
+class _FilterChipGroupScreenState extends State<FilterChipGroupScreen> {
+  Set<CloseApproachBody> demo0SelectionSet = {};
+  Set<CloseApproachBody> demo1SelectionSet = {};
+  Set<CloseApproachBody> demo2SelectionSet = {};
+  Set<CloseApproachBody> demo3SelectionSet = {};
+  Set<CloseApproachBody> demo4SelectionSet = {};
+  Set<CloseApproachBody> demo5SelectionSet = {};
+  Set<CloseApproachBody> demo6SelectionSet = {};
 
   @override
   void initState() {
     super.initState();
-    demo3Selection = ChoiceChipGroupScreen.defaultSelection;
-    demo4Selection = ChoiceChipGroupScreen.defaultSelection;
-    demo5Selection = ChoiceChipGroupScreen.defaultSelection;
+    demo3SelectionSet = Set.from(FilterChipGroupScreen.defaultSelectionSet);
+    demo4SelectionSet = Set.from(FilterChipGroupScreen.defaultSelectionSet);
+    demo5SelectionSet = Set.from(FilterChipGroupScreen.defaultSelectionSet);
+    demo6SelectionSet = Set.from(FilterChipGroupScreen.closeApproachBodySet);
   }
 
   @override
@@ -91,7 +97,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
 
   Widget _getBody({required BuildContext context}) {
     return CustomScrollView(
-      key: ChoiceChipGroupScreen.customScrollViewKey,
+      key: FilterChipGroupScreen.customScrollViewKey,
       controller: ScrollController(),
       slivers: [
         getSliverAppBar(
@@ -121,6 +127,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
       _getDemo3(context: context),
       _getDemo4(context: context),
       _getDemo5(context: context),
+      _getDemo6(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: HrkDimensions.pageMarginVerticalHalf,
@@ -138,16 +145,16 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
         vertical: HrkDimensions.pageMarginVerticalHalf,
       ),
       sliver: SliverToBoxAdapter(
-        child: ChoiceChipGroup<CloseApproachBody>(
-          key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
-          keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
-          values: ChoiceChipGroupScreen.closeApproachBodySet,
+        child: FilterChipGroup<CloseApproachBody>(
+          key: FilterChipGroupScreen.getDemoKey(demoIndex),
+          keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          values: FilterChipGroupScreen.closeApproachBodySet,
           labels: widget.demoLabels,
           keys: widget.demoKeys,
-          selected: demo0Selection,
-          onChipSelected: (closeApproachBody) {
+          selectedSet: demo0SelectionSet,
+          onChipsSelected: (selectedSet) {
             setState(() {
-              demo0Selection = closeApproachBody;
+              demo0SelectionSet = selectedSet;
             });
           },
         ),
@@ -167,17 +174,17 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
         child: Center(
           child: SizedBox(
             width: HrkDimensions.bodyItemContentWidth,
-            child: ChoiceChipGroup<CloseApproachBody>(
-              key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
+            child: FilterChipGroup<CloseApproachBody>(
+              key: FilterChipGroupScreen.getDemoKey(demoIndex),
+              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
               title: widget.l10n.demo1,
-              values: ChoiceChipGroupScreen.closeApproachBodySet,
+              values: FilterChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
-              selected: demo1Selection,
-              onChipSelected: (closeApproachBody) {
+              selectedSet: demo1SelectionSet,
+              onChipsSelected: (selectedSet) {
                 setState(() {
-                  demo1Selection = closeApproachBody;
+                  demo1SelectionSet = selectedSet;
                 });
               },
             ),
@@ -198,17 +205,17 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
       sliver: SliverToBoxAdapter(
         child: Center(
           child: BodyItemContainer(
-            child: ChoiceChipGroup<CloseApproachBody>(
-              key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
+            child: FilterChipGroup<CloseApproachBody>(
+              key: FilterChipGroupScreen.getDemoKey(demoIndex),
+              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
               title: widget.l10n.demo2,
-              values: ChoiceChipGroupScreen.closeApproachBodySet,
+              values: FilterChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
-              selected: demo2Selection,
-              onChipSelected: (closeApproachBody) {
+              selectedSet: demo2SelectionSet,
+              onChipsSelected: (selectedSet) {
                 setState(() {
-                  demo2Selection = closeApproachBody;
+                  demo2SelectionSet = selectedSet;
                 });
               },
             ),
@@ -229,21 +236,17 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
       sliver: SliverToBoxAdapter(
         child: Center(
           child: BodyItemContainer(
-            child: ChoiceChipGroup<CloseApproachBody>(
-              key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
+            child: FilterChipGroup<CloseApproachBody>(
+              key: FilterChipGroupScreen.getDemoKey(demoIndex),
+              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
               title: widget.l10n.demo3,
-              values: ChoiceChipGroupScreen.closeApproachBodySet,
+              values: FilterChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
-              selected: demo3Selection,
-              onChipSelected: (closeApproachBody) {
+              selectedSet: demo3SelectionSet,
+              onChipsSelected: (selectedSet) {
                 setState(() {
-                  if (closeApproachBody == null) {
-                    demo3Selection = ChoiceChipGroupScreen.defaultSelection;
-                  } else {
-                    demo3Selection = closeApproachBody;
-                  }
+                  demo3SelectionSet = selectedSet;
                 });
               },
             ),
@@ -264,22 +267,18 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
       sliver: SliverToBoxAdapter(
         child: Center(
           child: BodyItemContainer(
-            child: ChoiceChipGroup<CloseApproachBody>(
-              key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
+            child: FilterChipGroup<CloseApproachBody>(
+              key: FilterChipGroupScreen.getDemoKey(demoIndex),
+              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
               enabled: false,
               title: widget.l10n.demo4,
-              values: ChoiceChipGroupScreen.closeApproachBodySet,
+              values: FilterChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
-              selected: demo4Selection,
-              onChipSelected: (closeApproachBody) {
+              selectedSet: demo4SelectionSet,
+              onChipsSelected: (selectedSet) {
                 setState(() {
-                  if (closeApproachBody == null) {
-                    demo4Selection = ChoiceChipGroupScreen.defaultSelection;
-                  } else {
-                    demo4Selection = closeApproachBody;
-                  }
+                  demo4SelectionSet = selectedSet;
                 });
               },
             ),
@@ -300,22 +299,49 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
       sliver: SliverToBoxAdapter(
         child: Center(
           child: BodyItemContainer(
-            child: ChoiceChipGroup<CloseApproachBody>(
-              key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
+            child: FilterChipGroup<CloseApproachBody>(
+              key: FilterChipGroupScreen.getDemoKey(demoIndex),
+              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
               title: widget.l10n.demo5,
-              values: ChoiceChipGroupScreen.closeApproachBodySet,
+              values: FilterChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
-              selected: demo5Selection,
+              selectedSet: demo5SelectionSet,
               disableInputs: true,
-              onChipSelected: (closeApproachBody) {
+              onChipsSelected: (selectedSet) {
                 setState(() {
-                  if (closeApproachBody == null) {
-                    demo5Selection = ChoiceChipGroupScreen.defaultSelection;
-                  } else {
-                    demo5Selection = closeApproachBody;
-                  }
+                  demo5SelectionSet = selectedSet;
+                });
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // All selected,
+  Widget _getDemo6({required BuildContext context}) {
+    int demoIndex = 6;
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Center(
+          child: BodyItemContainer(
+            child: FilterChipGroup<CloseApproachBody>(
+              key: FilterChipGroupScreen.getDemoKey(demoIndex),
+              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+              title: widget.l10n.demo6,
+              values: FilterChipGroupScreen.closeApproachBodySet,
+              labels: widget.demoLabels,
+              keys: widget.demoKeys,
+              selectedSet: demo6SelectionSet,
+              onChipsSelected: (selectedSet) {
+                setState(() {
+                  demo6SelectionSet = selectedSet;
                 });
               },
             ),

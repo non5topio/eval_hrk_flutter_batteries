@@ -26,12 +26,29 @@ void main() {
           chipElements[secondRandomIndex].widget as ChoiceChip;
       expect(firstRandomChip.selected, false);
       expect(secondRandomChip.selected, false);
+
       await tester.tap(find.byKey(firstRandomChip.key!));
       await tester.pump();
       chipElements = chipFinders.evaluate().toList();
       firstRandomChip = chipElements[firstRandomIndex].widget as ChoiceChip;
       secondRandomChip = chipElements[secondRandomIndex].widget as ChoiceChip;
       expect(firstRandomChip.selected, true);
+      expect(secondRandomChip.selected, false);
+
+      await tester.tap(find.byKey(secondRandomChip.key!));
+      await tester.pump();
+      chipElements = chipFinders.evaluate().toList();
+      firstRandomChip = chipElements[firstRandomIndex].widget as ChoiceChip;
+      secondRandomChip = chipElements[secondRandomIndex].widget as ChoiceChip;
+      expect(firstRandomChip.selected, false);
+      expect(secondRandomChip.selected, true);
+
+      await tester.tap(find.byKey(secondRandomChip.key!));
+      await tester.pump();
+      chipElements = chipFinders.evaluate().toList();
+      firstRandomChip = chipElements[firstRandomIndex].widget as ChoiceChip;
+      secondRandomChip = chipElements[secondRandomIndex].widget as ChoiceChip;
+      expect(firstRandomChip.selected, false);
       expect(secondRandomChip.selected, false);
     });
 
@@ -72,13 +89,15 @@ void main() {
       const int index = 5;
       await pumpChoiceChipGroupRoute(tester);
       await ensureDemoVisible(tester, index);
-      final chipElements = getChipFindersOf(index).evaluate();
-      for (final chipElement in chipElements) {
-        final chipWidget = chipElement.widget as ChoiceChip;
-        final selected = chipWidget.selected;
-        await tester.tap(find.byKey(chipWidget.key!), warnIfMissed: false);
+      final chipFinders = getChipFindersOf(index);
+      var chipElements = chipFinders.evaluate().toList();
+      for (int i = 0; i < chipElements.length; i++) {
+        var chip = chipElements[i].widget as ChoiceChip;
+        final selected = chip.selected;
+        await tester.tap(find.byKey(chip.key!), warnIfMissed: false);
         await tester.pump();
-        expect(chipWidget.selected, selected);
+        chip = tester.widget<ChoiceChip>(find.byKey(chip.key!));
+        expect(chip.selected, selected);
       }
     });
   });

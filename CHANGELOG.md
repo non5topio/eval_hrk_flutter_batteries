@@ -1,3 +1,7 @@
+## 0.2.0
+
+- Add `FilterChipGroup`
+
 ## 0.1.0
 
 - Add `ChoiceChipGroup`

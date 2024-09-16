@@ -38,6 +38,11 @@ RouteBase get $homeRoute => GoRouteData.$route(
           factory: $ChoiceChipGroupRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'filter-chip-group',
+          name: 'FilterChipGroup',
+          factory: $FilterChipGroupRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'label-link-inkwell-wrap',
           name: 'LabelLinkInkWellWrap',
           factory: $LabelLinkInkWellWrapRouteExtension._fromState,
@@ -126,6 +131,28 @@ extension $ChoiceChipGroupRouteExtension on ChoiceChipGroupRoute {
 
   String get location => GoRouteData.$location(
         '/choice-chip-group',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
+
+extension $FilterChipGroupRouteExtension on FilterChipGroupRoute {
+  static FilterChipGroupRoute _fromState(GoRouterState state) =>
+      FilterChipGroupRoute(
+        $extra: state.extra as Map<String, dynamic>?,
+      );
+
+  String get location => GoRouteData.$location(
+        '/filter-chip-group',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
