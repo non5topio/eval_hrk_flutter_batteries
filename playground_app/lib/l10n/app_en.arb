@@ -1,12 +1,14 @@
 {
   "playgroundApp": "Playground App",
-  "demo0": "Demo 0",
-  "demo1": "Demo 1",
-  "demo2": "Demo 2",
-  "demo3": "Demo 3",
-  "demo4": "Demo 4",
-  "demo5": "Demo 5",
-  "demo6": "Demo 6",
+  "demoIndex": "Demo {index}",
+  "@demoIndex": {
+    "placeholders": {
+      "index": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
   "search": "Search",
   "minimum": "Minimum",
   "maximum": "Maximum",
@@ -22,6 +24,8 @@
   },
   "dateFilter": "Date Filter",
   "selectDateRange": "Select Date Range",
+  "startDate": "Start Date",
+  "endDate": "End Date",
   "settings": "Settings",
   "language": "Language",
   "dateFormat": "Date Format",

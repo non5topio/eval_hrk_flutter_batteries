@@ -7,6 +7,7 @@ A library to accumulate required flutter Widgets, Helper, Utility codes.
 ## Features
 
 - Widgets
+  - [`DateRangeWidget`]
   - [`ChoiceChipGroup`]
   - [`FilterChipGroup`]
   - [`LabelLinkInkWellWrap`]
@@ -19,12 +20,16 @@ A library to accumulate required flutter Widgets, Helper, Utility codes.
   - [`HrkColors`]
   - [`LocaleJsonConverter`]
   - [`LocaleListJsonConverter`]
+  - [`LocaleJsonConverter2`]
+  - [`LocaleListJsonConverter2`]
   - Text Helper
     - [`getTextPainterLaidout()`]
     - [`getLargestTextWidth()`]
 - Extensions
   - [`HrkColorScheme`]
     - [`surfaceFixed`]
+  - [`HrkDateTimeRange`]
+    - [`ofMonth()`]
 
 ## Getting started
 
@@ -46,6 +51,7 @@ See the following folders for the respective examples in detail:
 [pub-link]: https://pub.dev/packages/hrk_flutter_batteries
 [codecov-badge]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries/branch/main/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries
+[`DateRangeWidget`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/DateRangeWidget-class.html
 [`ChoiceChipGroup`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/ChoiceChipGroup-class.html
 [`FilterChipGroup`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/FilterChipGroup-class.html
 [`LabelLinkInkWellWrap`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LabelLinkInkWellWrap-class.html
@@ -57,10 +63,14 @@ See the following folders for the respective examples in detail:
 [`HrkColors`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColors-class.html
 [`LocaleJsonConverter`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleJsonConverter-class.html
 [`LocaleListJsonConverter`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleListJsonConverter-class.html
+[`LocaleJsonConverter2`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleJsonConverter2-class.html
+[`LocaleListJsonConverter2`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleListJsonConverter2-class.html
 [`getTextPainterLaidout()`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/getTextPainterLaidout.html
 [`getLargestTextWidth()`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/getLargestTextWidth.html
 [`HrkColorScheme`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColorScheme.html
 [`surfaceFixed`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColorScheme/surfaceFixed.html
+[`HrkDateTimeRange`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkDateTimeRange.html
+[`ofMonth()`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkDateTimeRange/ofMonth.html
 [playground_app/lib/route]: playground_app/lib/route
 [test/unit_test]: test/unit_test
 [playground_app/test/widget_test]: playground_app/test/widget_test

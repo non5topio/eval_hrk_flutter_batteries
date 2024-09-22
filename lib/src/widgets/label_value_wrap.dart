@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../helper/text_helper.dart';
 
+/// A widget to display label and its value, if it doesn't fit in the same line
+/// then it is displayed in 2 lines but label with [TextAlign.start] and value
+/// with [TextAlign.end]
 class LabelValueWrap extends StatelessWidget {
   const LabelValueWrap({
     super.key,

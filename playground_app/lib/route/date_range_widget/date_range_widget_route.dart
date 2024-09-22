@@ -7,26 +7,26 @@ import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
 import '../../constants/labels.dart';
 import '../../deferred_loading/deferred_loading.dart';
-import 'filter_chip_group_screen.dart' deferred as filter_chip_group_screen;
+import 'date_range_widget_screen.dart' deferred as date_range_widget_screen;
 
-class FilterChipGroupRoute extends GoRouteData {
-  const FilterChipGroupRoute({
+class DateRangeWidgetRoute extends GoRouteData {
+  const DateRangeWidgetRoute({
     this.$extra,
   });
 
   final JsonMap? $extra;
 
-  static const String pathSegment = 'filter-chip-group';
+  static const String pathSegment = 'date-range-widget';
   static final Uri uri = Uri(path: '/$pathSegment');
-  static const String displayName = Labels.filterChipGroupCN;
+  static const String displayName = Labels.dateRangeWidgetCN;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     final l10n = AppLocalizations.of(context);
     const title = displayName;
     return DeferredWidget(
-      filter_chip_group_screen.loadLibrary,
-      () => filter_chip_group_screen.FilterChipGroupScreen(
+      date_range_widget_screen.loadLibrary,
+      () => date_range_widget_screen.DateRangeWidgetScreen(
         title: title,
         l10n: l10n,
       ),

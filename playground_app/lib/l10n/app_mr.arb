@@ -1,26 +1,15 @@
 {
-  "demo0": "डेमो ०",
-  "demo1": "डेमो १",
-  "demo2": "डेमो २",
-  "demo3": "डेमो ३",
-  "demo4": "डेमो ४",
-  "demo5": "डेमो ५",
-  "demo6": "डेमो ६",
+  "playgroundApp": "प्लेग्राउंड ऍप",
+  "demoIndex": "डेमो {index}",
   "search": "शोधा",
   "minimum": "किमान",
   "maximum": "कमाल",
   "nowToday": "आज",
-  "plusSomeDays": "{some, plural, =1{+ {some} दिवस} other{+ {some} दिवस}}",
-  "@plusSomeDays": {
-    "placeholders": {
-      "some": {
-        "type": "int",
-        "format": "compact"
-      }
-    }
-  },
+  "plusSomeDays": "+ {some} दिवस",
   "dateFilter": "तारीख निवड",
   "selectDateRange": "तारीख निवडा",
+  "startDate": "प्रारंभ तारीख",
+  "endDate": "समाप्ती तारीख",
   "settings": "सेटिंग्ज",
   "language": "भाषा",
   "dateFormat": "तारीख स्वरूप",

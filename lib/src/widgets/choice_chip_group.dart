@@ -10,29 +10,30 @@ class ChoiceChipGroup<T> extends StatelessWidget {
   const ChoiceChipGroup({
     super.key,
     this.keyPrefix = '',
-    this.enabled = true,
     this.title,
     required this.values,
     required this.labels,
     this.keys,
     this.selected,
+    this.enabled = true,
     this.disableInputs = false,
     this.spacing = HrkDimensions.bodyItemSpacing,
-    this.onChipSelected,
+    required this.onChipSelected,
   })  : assert(labels.length == values.length),
         assert(keys == null || keys.length == values.length);
 
   final String keyPrefix;
-  final bool enabled;
   final String? title;
   final Set<T> values;
   final Set<String> labels;
   final Set<String>? keys;
   final T? selected;
+  final bool enabled;
   final bool disableInputs;
   final double spacing;
-  final ChipSelected<T>? onChipSelected;
+  final ChipSelected<T> onChipSelected;
   static const String defaultKeyPrefix = 'choice_chip_group_';
+  static const String titleKey = 'title_key';
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class ChoiceChipGroup<T> extends StatelessWidget {
           if (title != null)
             Text(
               title!,
+              key: Key('$keyPrefix$titleKey'),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium,
             ),
@@ -82,9 +84,7 @@ class ChoiceChipGroup<T> extends StatelessWidget {
   }
 
   void _onSelected(bool selected, int index) {
-    if (onChipSelected != null) {
-      final T? value = selected ? values.elementAt(index) : null;
-      onChipSelected!(value);
-    }
+    final T? value = selected ? values.elementAt(index) : null;
+    onChipSelected(value);
   }
 }

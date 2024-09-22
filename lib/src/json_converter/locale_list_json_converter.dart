@@ -4,7 +4,11 @@ import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'locale_json_converter.dart';
+import 'locale_list_json_converter_2.dart';
 
+/// Locale list json converter for Nullable
+///
+/// See [LocaleListJsonConverter2] for non-nullable
 class LocaleListJsonConverter
     implements JsonConverter<List<Locale>?, List<dynamic>?> {
   const LocaleListJsonConverter();

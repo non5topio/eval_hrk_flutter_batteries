@@ -21,8 +21,10 @@ class PlaygroundApp extends StatelessWidget {
     super.key,
     GlobalKey<NavigatorState>? navigatorKey,
     String? initialLocation,
+    SettingsBloc? settingsBloc,
     bool debugShowCheckedModeBanner = true,
-  }) : _debugShowCheckedModeBanner = debugShowCheckedModeBanner {
+  })  : _settingsBloc = settingsBloc ?? SettingsBloc(),
+        _debugShowCheckedModeBanner = debugShowCheckedModeBanner {
     _goRouter = GoRouter(
       navigatorKey: navigatorKey,
       initialLocation: initialLocation,
@@ -35,13 +37,14 @@ class PlaygroundApp extends StatelessWidget {
   }
 
   late final GoRouter _goRouter;
+  final SettingsBloc _settingsBloc;
   final bool _debugShowCheckedModeBanner;
   final _logger = Logger('$appNamePascalCase.App');
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SettingsBloc>(
-      create: (_) => SettingsBloc(),
+      create: (_) => _settingsBloc,
       child: BlocSelector<SettingsBloc, SettingsState, ThemeData?>(
         selector: (state) => state.themeData,
         builder: (context, themeData) {
@@ -104,6 +107,9 @@ class PlaygroundApp extends StatelessWidget {
     );
   }
 
+  // locales is not always systemLocales, when non-null Locale is given to
+  // MaterialApp, then this callback is called by setting the given Locale as
+  // single element List to locales
   Locale? _localeListResolutionCallback({
     required BuildContext context,
     List<Locale>? locales,
@@ -111,7 +117,17 @@ class PlaygroundApp extends StatelessWidget {
   }) {
     _logger.fine('localeListResolutionCallback -> $locales');
     final settingsBloc = context.read<SettingsBloc>();
-    settingsBloc.add(SettingsSystemLocalesChanged(systemLocales: locales));
-    return null;
+    if (!listEquals(settingsBloc.state.systemLocales,
+        WidgetsBinding.instance.platformDispatcher.locales)) {
+      settingsBloc.add(SettingsSystemLocalesChanged(
+        systemLocales: WidgetsBinding.instance.platformDispatcher.locales,
+      ));
+    }
+    final Locale resolvedLocale = basicLocaleListResolution(
+      locales,
+      supportedLocales,
+    );
+    settingsBloc.add(SettingsLocaleResolved(resolvedLocale: resolvedLocale));
+    return resolvedLocale;
   }
 }

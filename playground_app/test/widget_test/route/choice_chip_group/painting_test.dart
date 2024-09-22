@@ -2,41 +2,41 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
+import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
 
 import 'package:playground_app/route/choice_chip_group/choice_chip_group_screen.dart';
-import '../../../src/globals.dart';
 import '../../../src/route/choice_chip_group/choice_chip_group_route.dart';
 
 void main() {
   group('$ChoiceChipGroup Painting Test', () {
-    testWidgets('Demo 0', (tester) async {
-      const int index = 0;
+    testWidgets('Demo 0, Basic', (tester) async {
+      const int demoIndex = 0;
       await pumpChoiceChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      expect(find.text(l10n.demo0), findsNothing);
-      final chipElements = getChipFindersOf(index).evaluate();
+      await ensureDemoVisible(tester, demoIndex);
+      expect(getTitleFinder(demoIndex), findsNothing);
+      final chipElements = getChipFindersOf(demoIndex).evaluate();
       expect(
         chipElements.length,
         ChoiceChipGroupScreen.closeApproachBodySet.length,
       );
     });
 
-    testWidgets('Demo 1, wrapped', (tester) async {
-      const int index = 1;
+    testWidgets('Demo 1, Wrapped', (tester) async {
+      const int demoIndex = 1;
       await pumpChoiceChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      expect(find.text(l10n.demo1), findsOne);
-      final chipFinders = getChipFindersOf(index);
+      await ensureDemoVisible(tester, demoIndex);
+      expect(getTitleFinder(demoIndex), findsOne);
+      final chipFinders = getChipFindersOf(demoIndex);
       final firstChipRect = tester.getRect(chipFinders.first);
       final lastChipRect = tester.getRect(chipFinders.last);
       expect(firstChipRect.top < lastChipRect.top, true);
     });
 
-    testWidgets('Demo 3, default selected', (tester) async {
-      const int index = 3;
+    testWidgets('Demo 3, Default selected', (tester) async {
+      const int demoIndex = 3;
       await pumpChoiceChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipElements = getChipFindersOf(index).evaluate();
+      await ensureDemoVisible(tester, demoIndex);
+      final chipElements = getChipFindersOf(demoIndex).evaluate();
       for (final (index, chipElement) in chipElements.indexed) {
         final chip = chipElement.widget as ChoiceChip;
         expect(
@@ -46,11 +46,20 @@ void main() {
       }
     });
 
-    testWidgets('Demo 4, disabled', (tester) async {
-      const int index = 4;
+    testWidgets('Demo 4, expectNoOverflow', (tester) async {
+      const int demoIndex = 4;
       await pumpChoiceChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipElements = getChipFindersOf(index).evaluate();
+      await ensureDemoVisible(tester, demoIndex);
+      tester.expectNoOverflow(
+        of: find.byKey(ChoiceChipGroupScreen.getDemoKey(demoIndex)),
+      );
+    });
+
+    testWidgets('Demo 5, Disabled', (tester) async {
+      const int demoIndex = 5;
+      await pumpChoiceChipGroupRoute(tester);
+      await ensureDemoVisible(tester, demoIndex);
+      final chipElements = getChipFindersOf(demoIndex).evaluate();
       for (final chipElement in chipElements) {
         final chip = chipElement.widget as ChoiceChip;
         expect(chip.isEnabled, false);

@@ -7,7 +7,7 @@ import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
 import '../../constants/labels.dart';
 import '../../deferred_loading/deferred_loading.dart';
-import 'choice_chip_group_screen.dart' deferred as choice_chip_group;
+import 'choice_chip_group_screen.dart' deferred as choice_chip_group_screen;
 
 class ChoiceChipGroupRoute extends GoRouteData {
   const ChoiceChipGroupRoute({
@@ -25,8 +25,8 @@ class ChoiceChipGroupRoute extends GoRouteData {
     final l10n = AppLocalizations.of(context);
     const title = displayName;
     return DeferredWidget(
-      choice_chip_group.loadLibrary,
-      () => choice_chip_group.ChoiceChipGroupScreen(
+      choice_chip_group_screen.loadLibrary,
+      () => choice_chip_group_screen.ChoiceChipGroupScreen(
         title: title,
         l10n: l10n,
       ),

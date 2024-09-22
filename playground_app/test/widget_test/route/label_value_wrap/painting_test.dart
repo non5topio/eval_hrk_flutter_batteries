@@ -11,7 +11,7 @@ void main() {
 
     testWidgets('Not wrapped', (tester) async {
       await pumpLabelValueWrapRoute(tester);
-      int demoIndex = 0;
+      const int demoIndex = 0;
       await ensureDemoVisible(tester, demoIndex);
       final labelValueWraps = getLabelValueWrapsOf(demoIndex);
       expect(labelValueWraps.length, expectedLabelValueWrapPerDemo);
@@ -33,7 +33,7 @@ void main() {
     testWidgets('Wrapped on ${LabelValueWrapScreen.demo1Width}',
         (tester) async {
       await pumpLabelValueWrapRoute(tester);
-      int demoIndex = 1;
+      const int demoIndex = 1;
       await ensureDemoVisible(tester, demoIndex);
       final labelValueWraps = getLabelValueWrapsOf(demoIndex);
       expect(labelValueWraps.length, expectedLabelValueWrapPerDemo);
@@ -55,7 +55,7 @@ void main() {
     testWidgets('Wrapped on ${DeviceDimensions.galaxyFoldPortraitWidth}',
         (tester) async {
       await pumpLabelValueWrapRoute(tester);
-      int demoIndex = 2;
+      const int demoIndex = 2;
       await ensureDemoVisible(tester, demoIndex);
       final labelValueWraps = getLabelValueWrapsOf(demoIndex);
       expect(labelValueWraps.length, expectedLabelValueWrapPerDemo);

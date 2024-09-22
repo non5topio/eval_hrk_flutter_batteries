@@ -1,5 +1,5 @@
 name: hrk_flutter_batteries
-version: 0.2.0
+version: 0.3.0
 
 description: >-
   A library to accumulate required flutter Widgets, Helper, Utility codes.
@@ -15,7 +15,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  hrk_batteries: ^2.0.0
+  intl: '>=0.19.0 <1.0.0'
+  hrk_batteries: ^2.2.0
   json_annotation: ^4.9.0
   url_launcher: ^6.3.0
   material_color_utilities: '>=0.11.1 <1.0.0'

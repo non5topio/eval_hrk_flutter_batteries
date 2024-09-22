@@ -72,6 +72,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
   CloseApproachBody? demo3Selection;
   CloseApproachBody? demo4Selection;
   CloseApproachBody? demo5Selection;
+  CloseApproachBody? demo6Selection;
 
   @override
   void initState() {
@@ -79,6 +80,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
     demo3Selection = ChoiceChipGroupScreen.defaultSelection;
     demo4Selection = ChoiceChipGroupScreen.defaultSelection;
     demo5Selection = ChoiceChipGroupScreen.defaultSelection;
+    demo6Selection = ChoiceChipGroupScreen.defaultSelection;
   }
 
   @override
@@ -121,6 +123,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
       _getDemo3(context: context),
       _getDemo4(context: context),
       _getDemo5(context: context),
+      _getDemo6(context: context),
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: HrkDimensions.pageMarginVerticalHalf,
@@ -129,7 +132,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
     ];
   }
 
-  // Just group, no title
+  // Basic
   Widget _getDemo0({required BuildContext context}) {
     int demoIndex = 0;
     return SliverPadding(
@@ -155,7 +158,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
     );
   }
 
-  // Title, No container
+  // title
   Widget _getDemo1({required BuildContext context}) {
     int demoIndex = 1;
     return SliverPadding(
@@ -170,7 +173,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
             child: ChoiceChipGroup<CloseApproachBody>(
               key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
               keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demo1,
+              title: widget.l10n.demoIndex(demoIndex),
               values: ChoiceChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
@@ -187,7 +190,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
     );
   }
 
-  // With BodyItemContainer
+  // BodyItemContainer
   Widget _getDemo2({required BuildContext context}) {
     int demoIndex = 2;
     return SliverPadding(
@@ -201,7 +204,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
             child: ChoiceChipGroup<CloseApproachBody>(
               key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
               keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demo2,
+              title: widget.l10n.demoIndex(demoIndex),
               values: ChoiceChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
@@ -218,7 +221,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
     );
   }
 
-  // Default selection
+  // Default selected
   Widget _getDemo3({required BuildContext context}) {
     int demoIndex = 3;
     return SliverPadding(
@@ -232,7 +235,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
             child: ChoiceChipGroup<CloseApproachBody>(
               key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
               keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demo3,
+              title: widget.l10n.demoIndex(demoIndex),
               values: ChoiceChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
@@ -253,7 +256,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
     );
   }
 
-  // Disabled
+  // expectNoOverflow
   Widget _getDemo4({required BuildContext context}) {
     int demoIndex = 4;
     return SliverPadding(
@@ -263,25 +266,28 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
       ),
       sliver: SliverToBoxAdapter(
         child: Center(
-          child: BodyItemContainer(
-            child: ChoiceChipGroup<CloseApproachBody>(
-              key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              enabled: false,
-              title: widget.l10n.demo4,
-              values: ChoiceChipGroupScreen.closeApproachBodySet,
-              labels: widget.demoLabels,
-              keys: widget.demoKeys,
-              selected: demo4Selection,
-              onChipSelected: (closeApproachBody) {
-                setState(() {
-                  if (closeApproachBody == null) {
-                    demo4Selection = ChoiceChipGroupScreen.defaultSelection;
-                  } else {
-                    demo4Selection = closeApproachBody;
-                  }
-                });
-              },
+          child: SizedBox(
+            width: DeviceDimensions.galaxyFoldPortraitWidth -
+                (HrkDimensions.pageMarginHorizontal * 2),
+            child: BodyItemContainer(
+              child: ChoiceChipGroup<CloseApproachBody>(
+                key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
+                keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
+                title: widget.l10n.demoIndex(demoIndex),
+                values: ChoiceChipGroupScreen.closeApproachBodySet,
+                labels: widget.demoLabels,
+                keys: widget.demoKeys,
+                selected: demo4Selection,
+                onChipSelected: (closeApproachBody) {
+                  setState(() {
+                    if (closeApproachBody == null) {
+                      demo4Selection = ChoiceChipGroupScreen.defaultSelection;
+                    } else {
+                      demo4Selection = closeApproachBody;
+                    }
+                  });
+                },
+              ),
             ),
           ),
         ),
@@ -289,7 +295,7 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
     );
   }
 
-  // Disabled inputs
+  // Disabled
   Widget _getDemo5({required BuildContext context}) {
     int demoIndex = 5;
     return SliverPadding(
@@ -303,18 +309,54 @@ class _ChoiceChipGroupScreenState extends State<ChoiceChipGroupScreen> {
             child: ChoiceChipGroup<CloseApproachBody>(
               key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
               keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demo5,
+              enabled: false,
+              title: widget.l10n.demoIndex(demoIndex),
               values: ChoiceChipGroupScreen.closeApproachBodySet,
               labels: widget.demoLabels,
               keys: widget.demoKeys,
               selected: demo5Selection,
-              disableInputs: true,
               onChipSelected: (closeApproachBody) {
                 setState(() {
                   if (closeApproachBody == null) {
                     demo5Selection = ChoiceChipGroupScreen.defaultSelection;
                   } else {
                     demo5Selection = closeApproachBody;
+                  }
+                });
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // disableInputs
+  Widget _getDemo6({required BuildContext context}) {
+    int demoIndex = 6;
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Center(
+          child: BodyItemContainer(
+            child: ChoiceChipGroup<CloseApproachBody>(
+              key: ChoiceChipGroupScreen.getDemoKey(demoIndex),
+              keyPrefix: ChoiceChipGroupScreen.getDemoKeyPrefix(demoIndex),
+              title: widget.l10n.demoIndex(demoIndex),
+              values: ChoiceChipGroupScreen.closeApproachBodySet,
+              labels: widget.demoLabels,
+              keys: widget.demoKeys,
+              selected: demo6Selection,
+              disableInputs: true,
+              onChipSelected: (closeApproachBody) {
+                setState(() {
+                  if (closeApproachBody == null) {
+                    demo6Selection = ChoiceChipGroupScreen.defaultSelection;
+                  } else {
+                    demo6Selection = closeApproachBody;
                   }
                 });
               },

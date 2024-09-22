@@ -10,11 +10,11 @@ import '../../../src/route/choice_chip_group/choice_chip_group_route.dart';
 
 void main() {
   group('$ChoiceChipGroup Interaction Test', () {
-    testWidgets('Demo 0', (tester) async {
-      const int index = 0;
+    testWidgets('Demo 0, Basic', (tester) async {
+      const int demoIndex = 0;
       await pumpChoiceChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipFinders = getChipFindersOf(index);
+      await ensureDemoVisible(tester, demoIndex);
+      final chipFinders = getChipFindersOf(demoIndex);
       var chipElements = chipFinders.evaluate().toList();
       final int firstRandomIndex = Random().nextInt(chipElements.length);
       var firstRandomChip = chipElements[firstRandomIndex].widget as ChoiceChip;
@@ -52,11 +52,11 @@ void main() {
       expect(secondRandomChip.selected, false);
     });
 
-    testWidgets('Demo 3, default selected', (tester) async {
-      const int index = 3;
+    testWidgets('Demo 3, Default selected', (tester) async {
+      const int demoIndex = 3;
       await pumpChoiceChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipFinders = getChipFindersOf(index);
+      await ensureDemoVisible(tester, demoIndex);
+      final chipFinders = getChipFindersOf(demoIndex);
       var chipElements = chipFinders.evaluate().toList();
       final defaultIndex = ChoiceChipGroupScreen.defaultSelectionIndex;
       var defaultChip = chipElements[defaultIndex].widget as ChoiceChip;
@@ -85,20 +85,12 @@ void main() {
       expect(nonDefaultChip.selected, false);
     });
 
-    testWidgets('Demo 5, disableInputs', (tester) async {
-      const int index = 5;
+    testWidgets('Demo 6, disableInputs', (tester) async {
+      const int demoIndex = 6;
       await pumpChoiceChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipFinders = getChipFindersOf(index);
-      var chipElements = chipFinders.evaluate().toList();
-      for (int i = 0; i < chipElements.length; i++) {
-        var chip = chipElements[i].widget as ChoiceChip;
-        final selected = chip.selected;
-        await tester.tap(find.byKey(chip.key!), warnIfMissed: false);
-        await tester.pump();
-        chip = tester.widget<ChoiceChip>(find.byKey(chip.key!));
-        expect(chip.selected, selected);
-      }
+      await ensureDemoVisible(tester, demoIndex);
+      final chipFinders = getChipFindersOf(demoIndex);
+      expect(chipFinders.hitTestable().evaluate().length, 0);
     });
   });
 }

@@ -32,6 +32,7 @@ class RadioDialog<T> extends StatelessWidget {
       icon: icon,
       title: Text(title),
       content: SizedBox(
+        // TODO(hrishikesh-kadam): Try if constants from HrkDimensions can be used
         // 360−(40*2)−(24*2) = 232
         // Screen width - (AlertDialog Padding * 2) - (contentPadding * 2)
         // Gets only 232 on 360 wide screen, but if screen has more width then

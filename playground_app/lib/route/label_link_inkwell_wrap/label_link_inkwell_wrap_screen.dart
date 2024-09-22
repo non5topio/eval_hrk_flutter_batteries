@@ -134,7 +134,7 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
     );
   }
 
-  // With preFollowLink
+  // preFollowLink
   Widget _getDemo4() {
     return LabelLinkInkWellWrap(
       key: demo4Key,
@@ -146,7 +146,7 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
     );
   }
 
-  // With customFollowLink
+  // customFollowLink
   Widget _getDemo5() {
     return LabelLinkInkWellWrap(
       key: demo5Key,
@@ -158,7 +158,7 @@ class LabelLinkInkWellWrapScreen extends StatelessWidget {
     );
   }
 
-  // With preFollowLink, customFollowLink
+  // preFollowLink, customFollowLink
   Widget _getDemo6() {
     return LabelLinkInkWellWrap(
       key: demo6Key,

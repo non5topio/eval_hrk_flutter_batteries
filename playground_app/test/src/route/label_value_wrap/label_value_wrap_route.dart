@@ -5,20 +5,20 @@ import 'package:playground_app/route/label_value_wrap/label_value_wrap_route.dar
 import 'package:playground_app/route/label_value_wrap/label_value_wrap_screen.dart';
 import '../../playground_app.dart';
 
-final Finder listViewKeyFinder = find.byKey(LabelValueWrapScreen.listViewKey);
+final Finder listViewFinder = find.byKey(LabelValueWrapScreen.listViewKey);
 
-Future<void> ensureDemoVisible(WidgetTester tester, int index) async {
+Future<void> ensureDemoVisible(WidgetTester tester, int demoIndex) async {
   await tester.dragUntilVisible(
-    find.byKey(LabelValueWrapScreen.getDemoKey(index)),
-    listViewKeyFinder,
+    find.byKey(LabelValueWrapScreen.getDemoKey(demoIndex)),
+    listViewFinder,
     const Offset(0, -200),
   );
   await tester.pumpAndSettle();
 }
 
-List<LabelValueWrap> getLabelValueWrapsOf(int index) {
+List<LabelValueWrap> getLabelValueWrapsOf(int demoIndex) {
   final labelValueWrapFinder = find.descendant(
-    of: find.byKey(LabelValueWrapScreen.getDemoKey(index)),
+    of: find.byKey(LabelValueWrapScreen.getDemoKey(demoIndex)),
     matching: find.byType(LabelValueWrap),
   );
   return labelValueWrapFinder

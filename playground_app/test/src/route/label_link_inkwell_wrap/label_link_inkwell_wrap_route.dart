@@ -4,7 +4,7 @@ import 'package:playground_app/route/label_link_inkwell_wrap/label_link_inkwell_
 import 'package:playground_app/route/label_link_inkwell_wrap/label_link_inkwell_wrap_screen.dart';
 import '../../playground_app.dart';
 
-final Finder listViewKeyFinder =
+final Finder listViewFinder =
     find.byKey(LabelLinkInkWellWrapScreen.listViewKey);
 
 Future<void> pumpLabelLinkInkWellWrapRoute(

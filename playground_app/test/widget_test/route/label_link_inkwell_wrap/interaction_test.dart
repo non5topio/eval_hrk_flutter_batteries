@@ -15,12 +15,12 @@ void main() {
       expect(
           find.byType(LabelLinkInkWellWrap), findsNWidgets(demoWidgetsCount));
       final labelFinder = find.descendantText(
-        of: listViewKeyFinder,
+        of: listViewFinder,
         text: '${l10n.source}: ',
       );
       expect(labelFinder, findsNWidgets(demoWidgetsCount));
       final uriFinder = find.descendantText(
-        of: listViewKeyFinder,
+        of: listViewFinder,
         text: Constants.sourceRepoUrl.toString(),
       );
       expect(uriFinder, findsNWidgets(demoWidgetsCount));
@@ -31,17 +31,17 @@ void main() {
       await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo1LinkKey));
     });
 
-    testWidgets('With preFollowLink', (tester) async {
+    testWidgets('preFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
       await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo4LinkKey));
     });
 
-    testWidgets('With customFollowLink', (tester) async {
+    testWidgets('customFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
       await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo5LinkKey));
     });
 
-    testWidgets('With preFollowLink, customFollowLink', (tester) async {
+    testWidgets('preFollowLink, customFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
       await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo6LinkKey));
     });

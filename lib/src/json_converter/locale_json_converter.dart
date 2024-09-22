@@ -3,6 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:hrk_batteries/hrk_batteries.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'locale_json_converter_2.dart';
+
+/// Locale json converter for Nullable
+///
+/// See [LocaleJsonConverter2] for non-nullable
 class LocaleJsonConverter implements JsonConverter<Locale?, JsonMap?> {
   const LocaleJsonConverter();
 

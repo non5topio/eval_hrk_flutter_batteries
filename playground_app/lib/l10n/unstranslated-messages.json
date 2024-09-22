@@ -1,13 +1,7 @@
 {
   "ar": [
     "playgroundApp",
-    "demo0",
-    "demo1",
-    "demo2",
-    "demo3",
-    "demo4",
-    "demo5",
-    "demo6",
+    "demoIndex",
     "search",
     "minimum",
     "maximum",
@@ -15,6 +9,8 @@
     "plusSomeDays",
     "dateFilter",
     "selectDateRange",
+    "startDate",
+    "endDate",
     "settings",
     "language",
     "dateFormat",
@@ -105,13 +101,7 @@
 
   "he": [
     "playgroundApp",
-    "demo0",
-    "demo1",
-    "demo2",
-    "demo3",
-    "demo4",
-    "demo5",
-    "demo6",
+    "demoIndex",
     "search",
     "minimum",
     "maximum",
@@ -119,6 +109,8 @@
     "plusSomeDays",
     "dateFilter",
     "selectDateRange",
+    "startDate",
+    "endDate",
     "settings",
     "language",
     "dateFormat",
@@ -205,13 +197,5 @@
     "light",
     "dark",
     "space"
-  ],
-
-  "hi": [
-    "playgroundApp"
-  ],
-
-  "mr": [
-    "playgroundApp"
   ]
 }

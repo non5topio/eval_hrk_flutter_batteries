@@ -8,6 +8,7 @@ import '../../constants/labels.dart';
 import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 import '../choice_chip_group/choice_chip_group_route.dart';
+import '../date_range_widget/date_range_widget_route.dart';
 import '../filter_chip_group/filter_chip_group_route.dart';
 import '../label_link_inkwell_wrap/label_link_inkwell_wrap_route.dart';
 import '../label_value_wrap/label_value_wrap_route.dart';
@@ -59,6 +60,7 @@ class HomeScreen extends StatelessWidget {
           bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
+      _getDateRangeWidget(context: context),
       _getChoiceChipGroup(context: context),
       _getFilterChipGroup(context: context),
       _getLabelLinkInkWellWrap(context: context),
@@ -69,6 +71,37 @@ class HomeScreen extends StatelessWidget {
         ),
       )
     ];
+  }
+
+  Widget _getDateRangeWidget({required BuildContext context}) {
+    final themeData = Theme.of(context);
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: HrkDimensions.pageMarginHorizontal,
+        vertical: HrkDimensions.pageMarginVerticalHalf,
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Center(
+          child: Link(
+            uri: DateRangeWidgetRoute.uri,
+            builder: (context, followLink) {
+              return FilledButton(
+                child: Text(
+                  Labels.dateRangeWidgetCN,
+                  textAlign: TextAlign.center,
+                  style: themeData.textTheme.bodyMedium?.copyWith(
+                    color: themeData.colorScheme.onPrimary,
+                  ),
+                ),
+                onPressed: () {
+                  DateRangeWidgetRoute($extra: getRouteExtraMap()).go(context);
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _getChoiceChipGroup({required BuildContext context}) {

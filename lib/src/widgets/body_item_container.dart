@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/hrk_dimensions.dart';
 
+/// Container for body items
 class BodyItemContainer extends StatelessWidget {
   const BodyItemContainer({
     super.key,

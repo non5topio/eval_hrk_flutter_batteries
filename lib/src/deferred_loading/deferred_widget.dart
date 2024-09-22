@@ -1,4 +1,5 @@
 // coverage:ignore-file
+// ignore_for_file: public_member_api_docs
 
 // Copyright 2019 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be

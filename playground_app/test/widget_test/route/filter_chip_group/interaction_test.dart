@@ -9,11 +9,11 @@ import '../../../src/route/filter_chip_group/filter_chip_group_route.dart';
 
 void main() {
   group('$FilterChipGroup Interaction Test', () {
-    testWidgets('Demo 0', (tester) async {
-      const int index = 0;
+    testWidgets('Demo 0, Basic', (tester) async {
+      const int demoIndex = 0;
       await pumpFilterChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipFinders = getChipFindersOf(index);
+      await ensureDemoVisible(tester, demoIndex);
+      final chipFinders = getChipFindersOf(demoIndex);
       var chipElements = chipFinders.evaluate().toList();
       final int firstRandomIndex = Random().nextInt(chipElements.length);
       var firstRandomChip = chipElements[firstRandomIndex].widget as FilterChip;
@@ -59,27 +59,19 @@ void main() {
       expect(secondRandomChip.selected, false);
     });
 
-    testWidgets('Demo 5, disableInputs', (tester) async {
-      const int index = 5;
+    testWidgets('Demo 6, disableInputs', (tester) async {
+      const int demoIndex = 6;
       await pumpFilterChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipFinders = getChipFindersOf(index);
-      var chipElements = chipFinders.evaluate().toList();
-      for (int i = 0; i < chipElements.length; i++) {
-        var chip = chipElements[i].widget as FilterChip;
-        final selected = chip.selected;
-        await tester.tap(find.byKey(chip.key!), warnIfMissed: false);
-        await tester.pump();
-        chip = tester.widget<FilterChip>(find.byKey(chip.key!));
-        expect(chip.selected, selected);
-      }
+      await ensureDemoVisible(tester, demoIndex);
+      final chipFinders = getChipFindersOf(demoIndex);
+      expect(chipFinders.hitTestable().evaluate().length, 0);
     });
 
-    testWidgets('Demo 6, unselect and select all', (tester) async {
-      const int index = 6;
+    testWidgets('Demo 7, Unselect and select all', (tester) async {
+      const int demoIndex = 7;
       await pumpFilterChipGroupRoute(tester);
-      await ensureDemoVisible(tester, index);
-      final chipFinders = getChipFindersOf(index);
+      await ensureDemoVisible(tester, demoIndex);
+      final chipFinders = getChipFindersOf(demoIndex);
       var chipElements = chipFinders.evaluate().toList();
       for (int i = 0; i < chipElements.length; i++) {
         var chip = chipElements[i].widget as FilterChip;

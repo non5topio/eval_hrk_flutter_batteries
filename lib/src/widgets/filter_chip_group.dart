@@ -10,29 +10,30 @@ class FilterChipGroup<T> extends StatelessWidget {
   const FilterChipGroup({
     super.key,
     this.keyPrefix = '',
-    this.enabled = true,
     this.title,
     required this.values,
     required this.labels,
     this.keys,
     this.selectedSet = const {},
+    this.enabled = true,
     this.disableInputs = false,
     this.spacing = HrkDimensions.bodyItemSpacing,
-    this.onChipsSelected,
+    required this.onChipsSelected,
   })  : assert(labels.length == values.length),
         assert(keys == null || keys.length == values.length);
 
   final String keyPrefix;
-  final bool enabled;
   final String? title;
   final Set<T> values;
   final Set<String> labels;
   final Set<String>? keys;
   final Set<T> selectedSet;
+  final bool enabled;
   final bool disableInputs;
   final double spacing;
-  final ChipsSelected<T>? onChipsSelected;
+  final ChipsSelected<T> onChipsSelected;
   static const String defaultKeyPrefix = 'filter_chip_group_';
+  static const String titleKey = 'title_key';
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class FilterChipGroup<T> extends StatelessWidget {
           if (title != null)
             Text(
               title!,
+              key: Key('$keyPrefix$titleKey'),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium,
             ),
@@ -82,14 +84,12 @@ class FilterChipGroup<T> extends StatelessWidget {
   }
 
   void _onSelected(bool selectedBool, int index) {
-    if (onChipsSelected != null) {
-      final Set<T> newSelectedSet = Set.from(selectedSet);
-      if (selectedBool) {
-        newSelectedSet.add(values.elementAt(index));
-      } else {
-        newSelectedSet.remove(values.elementAt(index));
-      }
-      onChipsSelected!(newSelectedSet);
+    final Set<T> newSelectedSet = Set.from(selectedSet);
+    if (selectedBool) {
+      newSelectedSet.add(values.elementAt(index));
+    } else {
+      newSelectedSet.remove(values.elementAt(index));
     }
+    onChipsSelected(newSelectedSet);
   }
 }

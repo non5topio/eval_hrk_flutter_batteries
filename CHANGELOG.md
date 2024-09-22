@@ -1,3 +1,12 @@
+## 0.3.0
+
+- Add
+  - `DateRangeWidget`
+  - `LocaleJsonConverter2`
+  - `LocaleListJsonConverter2`
+  - `HrkDateTimeRange`
+    - `ofMonth()`
+
 ## 0.2.0
 
 - Add `FilterChipGroup`
