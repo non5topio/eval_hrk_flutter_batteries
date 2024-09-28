@@ -8,6 +8,7 @@ class Labels {
   static const String dateRangeWidgetCN = 'DateRangeWidget';
   static const String choiceChipGroupCN = 'ChoiceChipGroup';
   static const String filterChipGroupCN = 'FilterChipGroup';
+  static const String choiceChipInputWidgetCN = 'ChoiceChipInputWidget';
   static const String labelLinkInkwellWrapCN = 'LabelLinkInkWellWrap';
   static const String labelValueWrapCN = 'LabelValueWrap';
   static const String tdb = 'TDB';

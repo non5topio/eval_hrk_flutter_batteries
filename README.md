@@ -7,6 +7,7 @@ A library to accumulate required flutter Widgets, Helper, Utility codes.
 ## Features
 
 - Widgets
+  - [`ChoiceChipInputWidget`]
   - [`DateRangeWidget`]
   - [`ChoiceChipGroup`]
   - [`FilterChipGroup`]
@@ -16,6 +17,7 @@ A library to accumulate required flutter Widgets, Helper, Utility codes.
   - [`RadioDialog`]
   - [`DeferredWidget`]
 - Helper, Utility codes
+  - [`StateMethod`]
   - [`HrkDimensions`]
   - [`HrkColors`]
   - [`LocaleJsonConverter`]
@@ -51,6 +53,7 @@ See the following folders for the respective examples in detail:
 [pub-link]: https://pub.dev/packages/hrk_flutter_batteries
 [codecov-badge]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries/branch/main/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/hrishikesh-kadam/hrk_flutter_batteries
+[`ChoiceChipInputWidget`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/ChoiceChipInputWidget-class.html
 [`DateRangeWidget`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/DateRangeWidget-class.html
 [`ChoiceChipGroup`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/ChoiceChipGroup-class.html
 [`FilterChipGroup`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/FilterChipGroup-class.html
@@ -59,6 +62,7 @@ See the following folders for the respective examples in detail:
 [`RadioSettingsTile`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/RadioSettingsTile-class.html
 [`RadioDialog`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/RadioDialog-class.html
 [`DeferredWidget`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/DeferredWidget-class.html
+[`StateMethod`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/StateMethod.html
 [`HrkDimensions`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkDimensions-class.html
 [`HrkColors`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/HrkColors-class.html
 [`LocaleJsonConverter`]: https://pub.dev/documentation/hrk_flutter_batteries/latest/hrk_flutter_batteries/LocaleJsonConverter-class.html

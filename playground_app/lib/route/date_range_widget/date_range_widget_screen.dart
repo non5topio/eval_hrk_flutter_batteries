@@ -36,6 +36,14 @@ class DateRangeWidgetScreen extends StatefulWidget {
     return '$demoKeyPrefix${index}_';
   }
 
+  static Key getDemoScaffoldKey(int index) {
+    return Key('${getDemoKeyPrefix(index)}_scaffold_key');
+  }
+
+  static Key getDemoHeaderKey(int index) {
+    return Key('${getDemoKeyPrefix(index)}_header_key');
+  }
+
   static Key getDemoKey(int index) {
     return Key('${getDemoKeyPrefix(index)}key');
   }
@@ -113,19 +121,20 @@ class _DateRangeWidgetScreenState extends State<DateRangeWidgetScreen> {
   }
 
   List<Widget> _getSliverBody({required BuildContext context}) {
+    int demoIndex = 0;
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
-      _getDemo0(context: context),
-      _getDemo1(context: context),
-      _getDemo2(context: context),
-      _getDemo3(context: context),
-      _getDemo4(context: context),
-      _getDemo5(context: context),
-      _getDemo6(context: context),
+      _getDemo0(context: context, demoIndex: demoIndex++),
+      _getDemo1(context: context, demoIndex: demoIndex++),
+      _getDemo2(context: context, demoIndex: demoIndex++),
+      _getDemo3(context: context, demoIndex: demoIndex++),
+      _getDemo4(context: context, demoIndex: demoIndex++),
+      _getDemo5(context: context, demoIndex: demoIndex++),
+      _getDemo6(context: context, demoIndex: demoIndex++),
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: HrkDimensions.pageMarginVerticalHalf,
@@ -134,28 +143,87 @@ class _DateRangeWidgetScreenState extends State<DateRangeWidgetScreen> {
     ];
   }
 
-  // Basic
-  Widget _getDemo0({required BuildContext context}) {
-    int demoIndex = 0;
+  Widget _getDemoScaffold({
+    required BuildContext context,
+    required int demoIndex,
+    required String demoHeader,
+    required Widget demoWidget,
+  }) {
     return SliverPadding(
+      key: DateRangeWidgetScreen.getDemoScaffoldKey(demoIndex),
       padding: const EdgeInsets.symmetric(
         horizontal: HrkDimensions.pageMarginHorizontal,
         vertical: HrkDimensions.pageMarginVerticalHalf,
       ),
       sliver: SliverToBoxAdapter(
+        child: Column(
+          children: [
+            Text(
+              demoHeader,
+              key: DateRangeWidgetScreen.getDemoHeaderKey(demoIndex),
+              style: _getDemoHeaderTextStyle(context: context),
+            ),
+            const SizedBox(height: HrkDimensions.bodyItemSpacing),
+            demoWidget,
+          ],
+        ),
+      ),
+    );
+  }
+
+  TextStyle _getDemoHeaderTextStyle({required BuildContext context}) {
+    final theme = Theme.of(context);
+    return theme.textTheme.bodyMedium!.copyWith(
+      color: theme.colorScheme.tertiary,
+    );
+  }
+
+  Widget _getDemo0({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Basic',
+      demoWidget: DateRangeWidget(
+        key: DateRangeWidgetScreen.getDemoKey(demoIndex),
+        keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
+        startTitle: '${widget.l10n.startDate}:',
+        endTitle: '${widget.l10n.endDate}:',
+        dateRange: demo0DateTimeRange,
+        firstDate: DateRangeWidgetScreen.firstDate,
+        lastDate: DateRangeWidgetScreen.lastDate,
+        dateFormat: dateFormat,
+        selectButtonTitle: widget.l10n.selectDateRange,
+        onDateRangeSelected: (dateTimeRange) {
+          setState(() {
+            demo0DateTimeRange = dateTimeRange;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _getDemo1({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'title, dateTextDefault',
+      demoWidget: BodyItemContainer(
         child: DateRangeWidget(
           key: DateRangeWidgetScreen.getDemoKey(demoIndex),
           keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
           startTitle: '${widget.l10n.startDate}:',
           endTitle: '${widget.l10n.endDate}:',
-          dateRange: demo0DateTimeRange,
+          dateRange: demo1DateTimeRange,
           firstDate: DateRangeWidgetScreen.firstDate,
           lastDate: DateRangeWidgetScreen.lastDate,
           dateFormat: dateFormat,
+          startDateTextDefault: DateRangeWidgetScreen.customDateTextDefault,
+          endDateTextDefault: DateRangeWidgetScreen.customDateTextDefault,
           selectButtonTitle: widget.l10n.selectDateRange,
           onDateRangeSelected: (dateTimeRange) {
             setState(() {
-              demo0DateTimeRange = dateTimeRange;
+              demo1DateTimeRange = dateTimeRange;
             });
           },
         ),
@@ -163,213 +231,142 @@ class _DateRangeWidgetScreenState extends State<DateRangeWidgetScreen> {
     );
   }
 
-  // title, dateTextDefault
-  Widget _getDemo1({required BuildContext context}) {
-    int demoIndex = 1;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
+  Widget _getDemo2({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'BodyItemContainer',
+      demoWidget: BodyItemContainer(
+        child: DateRangeWidget(
+          key: DateRangeWidgetScreen.getDemoKey(demoIndex),
+          keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
+          startTitle: '${widget.l10n.startDate}:',
+          endTitle: '${widget.l10n.endDate}:',
+          dateRange: demo2DateTimeRange,
+          firstDate: DateRangeWidgetScreen.firstDate,
+          lastDate: DateRangeWidgetScreen.lastDate,
+          dateFormat: dateFormat,
+          selectButtonTitle: widget.l10n.selectDateRange,
+          onDateRangeSelected: (dateTimeRange) {
+            setState(() {
+              demo2DateTimeRange = dateTimeRange;
+            });
+          },
+        ),
       ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: DateRangeWidget(
-              key: DateRangeWidgetScreen.getDemoKey(demoIndex),
-              keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              startTitle: '${widget.l10n.startDate}:',
-              endTitle: '${widget.l10n.endDate}:',
-              dateRange: demo1DateTimeRange,
-              firstDate: DateRangeWidgetScreen.firstDate,
-              lastDate: DateRangeWidgetScreen.lastDate,
-              dateFormat: dateFormat,
-              startDateTextDefault: DateRangeWidgetScreen.customDateTextDefault,
-              endDateTextDefault: DateRangeWidgetScreen.customDateTextDefault,
-              selectButtonTitle: widget.l10n.selectDateRange,
-              onDateRangeSelected: (dateTimeRange) {
-                setState(() {
-                  demo1DateTimeRange = dateTimeRange;
-                });
-              },
-            ),
+    );
+  }
+
+  Widget _getDemo3({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'startEndAlign',
+      demoWidget: BodyItemContainer(
+        child: DateRangeWidget(
+          key: DateRangeWidgetScreen.getDemoKey(demoIndex),
+          keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          startTitle: '${widget.l10n.startDate}:',
+          endTitle: '${widget.l10n.endDate}:',
+          dateRange: demo3DateTimeRange,
+          firstDate: DateRangeWidgetScreen.firstDate,
+          lastDate: DateRangeWidgetScreen.lastDate,
+          dateFormat: dateFormat,
+          selectButtonTitle: widget.l10n.selectDateRange,
+          startEndAlign: true,
+          onDateRangeSelected: (dateTimeRange) {
+            setState(() {
+              demo3DateTimeRange = dateTimeRange;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _getDemo4({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'expectNoOverflow()',
+      demoWidget: SizedBox(
+        width: DeviceDimensions.galaxyFoldPortraitWidth -
+            (HrkDimensions.pageMarginHorizontal * 2),
+        child: BodyItemContainer(
+          child: DateRangeWidget(
+            key: DateRangeWidgetScreen.getDemoKey(demoIndex),
+            keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
+            title: widget.l10n.demoIndex(demoIndex),
+            startTitle: '${widget.l10n.startDate}:',
+            endTitle: '${widget.l10n.endDate}:',
+            dateRange: demo4DateTimeRange,
+            firstDate: DateRangeWidgetScreen.firstDate,
+            lastDate: DateRangeWidgetScreen.lastDate,
+            dateFormat: dateFormat,
+            selectButtonTitle: widget.l10n.selectDateRange,
+            onDateRangeSelected: (dateTimeRange) {
+              setState(() {
+                demo4DateTimeRange = dateTimeRange;
+              });
+            },
           ),
         ),
       ),
     );
   }
 
-  // BodyItemContainer
-  Widget _getDemo2({required BuildContext context}) {
-    int demoIndex = 2;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: DateRangeWidget(
-              key: DateRangeWidgetScreen.getDemoKey(demoIndex),
-              keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
-              startTitle: '${widget.l10n.startDate}:',
-              endTitle: '${widget.l10n.endDate}:',
-              dateRange: demo2DateTimeRange,
-              firstDate: DateRangeWidgetScreen.firstDate,
-              lastDate: DateRangeWidgetScreen.lastDate,
-              dateFormat: dateFormat,
-              selectButtonTitle: widget.l10n.selectDateRange,
-              onDateRangeSelected: (dateTimeRange) {
-                setState(() {
-                  demo2DateTimeRange = dateTimeRange;
-                });
-              },
-            ),
-          ),
+  Widget _getDemo5({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Disabled',
+      demoWidget: BodyItemContainer(
+        child: DateRangeWidget(
+          key: DateRangeWidgetScreen.getDemoKey(demoIndex),
+          keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          startTitle: '${widget.l10n.startDate}:',
+          endTitle: '${widget.l10n.endDate}:',
+          dateRange: demo5DateTimeRange,
+          firstDate: DateRangeWidgetScreen.firstDate,
+          lastDate: DateRangeWidgetScreen.lastDate,
+          dateFormat: dateFormat,
+          selectButtonTitle: widget.l10n.selectDateRange,
+          enabled: false,
+          onDateRangeSelected: (dateTimeRange) {
+            setState(() {
+              demo5DateTimeRange = dateTimeRange;
+            });
+          },
         ),
       ),
     );
   }
 
-  // startEndAlign
-  Widget _getDemo3({required BuildContext context}) {
-    int demoIndex = 3;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: DateRangeWidget(
-              key: DateRangeWidgetScreen.getDemoKey(demoIndex),
-              keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              startTitle: '${widget.l10n.startDate}:',
-              endTitle: '${widget.l10n.endDate}:',
-              dateRange: demo3DateTimeRange,
-              firstDate: DateRangeWidgetScreen.firstDate,
-              lastDate: DateRangeWidgetScreen.lastDate,
-              dateFormat: dateFormat,
-              selectButtonTitle: widget.l10n.selectDateRange,
-              startEndAlign: true,
-              onDateRangeSelected: (dateTimeRange) {
-                setState(() {
-                  demo3DateTimeRange = dateTimeRange;
-                });
-              },
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // expectNoOverflow
-  Widget _getDemo4({required BuildContext context}) {
-    int demoIndex = 4;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: SizedBox(
-            width: DeviceDimensions.galaxyFoldPortraitWidth -
-                (HrkDimensions.pageMarginHorizontal * 2),
-            child: BodyItemContainer(
-              child: DateRangeWidget(
-                key: DateRangeWidgetScreen.getDemoKey(demoIndex),
-                keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
-                title: widget.l10n.demoIndex(demoIndex),
-                startTitle: '${widget.l10n.startDate}:',
-                endTitle: '${widget.l10n.endDate}:',
-                dateRange: demo4DateTimeRange,
-                firstDate: DateRangeWidgetScreen.firstDate,
-                lastDate: DateRangeWidgetScreen.lastDate,
-                dateFormat: dateFormat,
-                selectButtonTitle: widget.l10n.selectDateRange,
-                onDateRangeSelected: (dateTimeRange) {
-                  setState(() {
-                    demo4DateTimeRange = dateTimeRange;
-                  });
-                },
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Disabled
-  Widget _getDemo5({required BuildContext context}) {
-    int demoIndex = 5;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: DateRangeWidget(
-              key: DateRangeWidgetScreen.getDemoKey(demoIndex),
-              keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              startTitle: '${widget.l10n.startDate}:',
-              endTitle: '${widget.l10n.endDate}:',
-              dateRange: demo5DateTimeRange,
-              firstDate: DateRangeWidgetScreen.firstDate,
-              lastDate: DateRangeWidgetScreen.lastDate,
-              dateFormat: dateFormat,
-              selectButtonTitle: widget.l10n.selectDateRange,
-              enabled: false,
-              onDateRangeSelected: (dateTimeRange) {
-                setState(() {
-                  demo5DateTimeRange = dateTimeRange;
-                });
-              },
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // disableInputs
-  Widget _getDemo6({required BuildContext context}) {
-    int demoIndex = 6;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: DateRangeWidget(
-              key: DateRangeWidgetScreen.getDemoKey(demoIndex),
-              keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              startTitle: '${widget.l10n.startDate}:',
-              endTitle: '${widget.l10n.endDate}:',
-              dateRange: demo6DateTimeRange,
-              firstDate: DateRangeWidgetScreen.firstDate,
-              lastDate: DateRangeWidgetScreen.lastDate,
-              dateFormat: dateFormat,
-              selectButtonTitle: widget.l10n.selectDateRange,
-              disableInputs: true,
-              onDateRangeSelected: (dateTimeRange) {
-                setState(() {
-                  demo6DateTimeRange = dateTimeRange;
-                });
-              },
-            ),
-          ),
+  Widget _getDemo6({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'disableInputs',
+      demoWidget: BodyItemContainer(
+        child: DateRangeWidget(
+          key: DateRangeWidgetScreen.getDemoKey(demoIndex),
+          keyPrefix: DateRangeWidgetScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          startTitle: '${widget.l10n.startDate}:',
+          endTitle: '${widget.l10n.endDate}:',
+          dateRange: demo6DateTimeRange,
+          firstDate: DateRangeWidgetScreen.firstDate,
+          lastDate: DateRangeWidgetScreen.lastDate,
+          dateFormat: dateFormat,
+          selectButtonTitle: widget.l10n.selectDateRange,
+          disableInputs: true,
+          onDateRangeSelected: (dateTimeRange) {
+            setState(() {
+              demo6DateTimeRange = dateTimeRange;
+            });
+          },
         ),
       ),
     );

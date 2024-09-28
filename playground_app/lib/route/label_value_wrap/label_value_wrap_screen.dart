@@ -5,20 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
-import 'package:hrk_logging/hrk_logging.dart';
 import 'package:hrk_nasa_apis/hrk_nasa_apis.dart';
 import 'package:hrk_nasa_apis_test/hrk_nasa_apis_test.dart';
 
 import '../../constants/labels.dart';
 import '../../extension/distance.dart';
 import '../../extension/velocity.dart';
-import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 import '../settings/bloc/settings_bloc.dart';
 import '../settings/bloc/settings_state.dart';
 
 class LabelValueWrapScreen extends StatelessWidget {
-  LabelValueWrapScreen({
+  const LabelValueWrapScreen({
     super.key,
     required this.title,
     required this.l10n,
@@ -30,8 +28,6 @@ class LabelValueWrapScreen extends StatelessWidget {
   final AppLocalizations l10n;
   final JsonMap? routeExtraMap;
   final String zeroDigit;
-  // ignore: unused_field
-  final _logger = Logger('$appNamePascalCase.LabelValueWrapScreen');
   static const String keyPrefix = 'label_value_wrap_screen_';
   static const Key listViewKey = Key('${keyPrefix}list_view_key');
   static const String demoKeyPrefix = '${keyPrefix}demo_';
@@ -51,6 +47,22 @@ class LabelValueWrapScreen extends StatelessWidget {
   static const String diameterSigmaKeyPrefix = 'diameter_sigma_';
   static const String fullnameKeyPrefix = 'fullname_';
   static const double demo1Width = 300;
+
+  static String getDemoKeyPrefix(int index) {
+    return '$demoKeyPrefix${index}_';
+  }
+
+  static Key getDemoScaffoldKey(int index) {
+    return Key('${getDemoKeyPrefix(index)}_scaffold_key');
+  }
+
+  static Key getDemoHeaderKey(int index) {
+    return Key('${getDemoKeyPrefix(index)}_header_key');
+  }
+
+  static Key getDemoKey(int index) {
+    return Key('$demoKeyPrefix${index}_key');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,62 +98,107 @@ class LabelValueWrapScreen extends StatelessWidget {
   }
 
   List<Widget> _getScrollableContents({required BuildContext context}) {
+    int demoIndex = 0;
     final SbdbCadBody sbdbCadBody = SbdbCadBodyExt.getSample('200/all-fields');
     return [
-      _getDemo0(sbdbCadBody: sbdbCadBody),
-      _getDemo1(sbdbCadBody: sbdbCadBody),
-      _getDemo2(sbdbCadBody: sbdbCadBody),
+      _getDemo0(
+        context: context,
+        demoIndex: demoIndex++,
+        sbdbCadBody: sbdbCadBody,
+      ),
+      _getDemo1(
+        context: context,
+        demoIndex: demoIndex++,
+        sbdbCadBody: sbdbCadBody,
+      ),
+      _getDemo2(
+        context: context,
+        demoIndex: demoIndex++,
+        sbdbCadBody: sbdbCadBody,
+      ),
     ];
   }
 
-  static Key getDemoKey(int index) {
-    return Key('$demoKeyPrefix${index}_key');
+  Widget _getDemoScaffold({
+    required BuildContext context,
+    required int demoIndex,
+    required String demoHeader,
+    required Widget demoWidget,
+  }) {
+    return Column(
+      key: getDemoScaffoldKey(demoIndex),
+      children: [
+        Text(
+          demoHeader,
+          key: getDemoHeaderKey(demoIndex),
+          style: _getDemoHeaderTextStyle(context: context),
+        ),
+        const SizedBox(height: HrkDimensions.bodyItemSpacing),
+        demoWidget,
+      ],
+    );
+  }
+
+  TextStyle _getDemoHeaderTextStyle({required BuildContext context}) {
+    final theme = Theme.of(context);
+    return theme.textTheme.bodyMedium!.copyWith(
+      color: theme.colorScheme.tertiary,
+    );
   }
 
   Widget _getDemo0({
+    required BuildContext context,
+    required int demoIndex,
     required SbdbCadBody sbdbCadBody,
   }) {
-    int demoIndex = 0;
-    return Center(
-      key: getDemoKey(demoIndex),
-      child: getDemoWidget(
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Not wrapped',
+      demoWidget: getDemoWidget(
         sbdbCadBody: sbdbCadBody,
         sbdbCadData: sbdbCadBody.data![0],
-        index: demoIndex,
+        demoIndex: demoIndex,
       ),
     );
   }
 
   Widget _getDemo1({
+    required BuildContext context,
+    required int demoIndex,
     required SbdbCadBody sbdbCadBody,
   }) {
-    int demoIndex = 1;
-    return Center(
-      key: getDemoKey(demoIndex),
-      child: SizedBox(
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Wrapped',
+      demoWidget: SizedBox(
         width: demo1Width,
         child: getDemoWidget(
           sbdbCadBody: sbdbCadBody,
           sbdbCadData: sbdbCadBody.data![0],
-          index: demoIndex,
+          demoIndex: demoIndex,
         ),
       ),
     );
   }
 
   Widget _getDemo2({
+    required BuildContext context,
+    required int demoIndex,
     required SbdbCadBody sbdbCadBody,
   }) {
-    int demoIndex = 2;
-    return Center(
-      key: getDemoKey(demoIndex),
-      child: SizedBox(
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'expectNoOverflow()',
+      demoWidget: SizedBox(
         width: DeviceDimensions.galaxyFoldPortraitWidth -
             (HrkDimensions.pageMarginHorizontal * 2),
         child: getDemoWidget(
           sbdbCadBody: sbdbCadBody,
           sbdbCadData: sbdbCadBody.data![0],
-          index: demoIndex,
+          demoIndex: demoIndex,
         ),
       ),
     );
@@ -150,15 +207,15 @@ class LabelValueWrapScreen extends StatelessWidget {
   Widget getDemoWidget({
     required SbdbCadBody sbdbCadBody,
     required SbdbCadData sbdbCadData,
-    required int index,
+    required int demoIndex,
   }) {
     return BodyItemContainer(
-      key: Key('$demoKeyPrefix${index}_container_key'),
+      key: Key('$demoKeyPrefix${demoIndex}_container_key'),
       child: SelectionArea(
         child: getItemBody(
           sbdbCadBody: sbdbCadBody,
           data: sbdbCadData,
-          index: index,
+          demoIndex: demoIndex,
         ),
       ),
     );
@@ -167,12 +224,13 @@ class LabelValueWrapScreen extends StatelessWidget {
   Widget getItemBody({
     required SbdbCadBody sbdbCadBody,
     required SbdbCadData data,
-    required int index,
+    required int demoIndex,
   }) {
     final fields = List<String>.from(sbdbCadBody.rawBody!['fields']);
-    final String demoIndexKeyPrefix = '$demoKeyPrefix${index}_';
+    final String demoIndexKeyPrefix = '$demoKeyPrefix${demoIndex}_';
     const spacing = HrkDimensions.bodyItemSpacing;
     return Column(
+      key: getDemoKey(demoIndex),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         LabelValueWrap(

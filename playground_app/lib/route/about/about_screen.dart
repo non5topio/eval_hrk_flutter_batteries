@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
-import 'package:hrk_logging/hrk_logging.dart';
 import 'package:url_launcher/link.dart';
 
 import '../../config/config.dart';
 import '../../constants/constants.dart';
-import '../../globals.dart';
 import '../../widgets/app_bar.dart';
 
 class AboutScreen extends StatelessWidget {
-  AboutScreen({
+  const AboutScreen({
     super.key,
     required this.title,
     required this.l10n,
@@ -21,8 +19,6 @@ class AboutScreen extends StatelessWidget {
 
   final String title;
   final AppLocalizations l10n;
-  // ignore: unused_field
-  final _logger = Logger('$appNamePascalCase.AboutScreen');
   static const String keyPrefix = 'about_screen_';
   static const Key scaffoldKey = Key('${keyPrefix}scaffold_key');
   static const Key listViewKey = Key('${keyPrefix}list_view_key');

@@ -111,5 +111,6 @@
   "theme": "Theme",
   "light": "Light",
   "dark": "Dark",
-  "space": "Space"
+  "space": "Space",
+  "name": "Name"
 }

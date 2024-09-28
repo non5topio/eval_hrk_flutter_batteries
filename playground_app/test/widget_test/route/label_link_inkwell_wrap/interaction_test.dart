@@ -28,22 +28,30 @@ void main() {
 
     testWidgets('Basic', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo1LinkKey));
+      await tester.tap(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLinkKey(0),
+      ));
     });
 
     testWidgets('preFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo4LinkKey));
+      await tester.tap(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLinkKey(3),
+      ));
     });
 
     testWidgets('customFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo5LinkKey));
+      await tester.tap(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLinkKey(4),
+      ));
     });
 
     testWidgets('preFollowLink, customFollowLink', (tester) async {
       await pumpLabelLinkInkWellWrapRoute(tester);
-      await tester.tap(find.byKey(LabelLinkInkWellWrapScreen.demo6LinkKey));
+      await tester.tap(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLinkKey(5),
+      ));
     });
   });
 }

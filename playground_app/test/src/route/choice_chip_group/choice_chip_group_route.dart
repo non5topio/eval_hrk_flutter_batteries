@@ -1,5 +1,8 @@
+// ignore_for_file: directives_ordering
+
 import 'package:flutter/material.dart';
 
+import 'package:checks/checks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
@@ -18,11 +21,21 @@ Future<void> pumpChoiceChipGroupRoute(
 
 Future<void> ensureDemoVisible(WidgetTester tester, int demoIndex) async {
   await tester.dragUntilVisible(
-    find.byKey(ChoiceChipGroupScreen.getDemoKey(demoIndex)),
+    find.byKey(ChoiceChipGroupScreen.getDemoScaffoldKey(demoIndex)),
     customScrollViewFinder,
     const Offset(0, -200),
   );
   await tester.pumpAndSettle();
+}
+
+Finder getHeaderFinder(int demoIndex) {
+  return find.byKey(ChoiceChipGroupScreen.getDemoHeaderKey(demoIndex));
+}
+
+void expectHeaderContainsDescription(WidgetTester tester, int demoIndex) {
+  final headerFinder = getHeaderFinder(demoIndex);
+  final headerText = tester.widget<Text>(headerFinder);
+  check(headerText.data!).contains(tester.testDescription);
 }
 
 Finder getTitleFinder(int demoIndex) {

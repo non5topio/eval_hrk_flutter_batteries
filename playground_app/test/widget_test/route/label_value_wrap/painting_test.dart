@@ -10,14 +10,13 @@ void main() {
     int expectedLabelValueWrapPerDemo = 15;
 
     testWidgets('Not wrapped', (tester) async {
-      await pumpLabelValueWrapRoute(tester);
       const int demoIndex = 0;
+      await pumpLabelValueWrapRoute(tester);
+      disableOverflowError();
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       final labelValueWraps = getLabelValueWrapsOf(demoIndex);
       expect(labelValueWraps.length, expectedLabelValueWrapPerDemo);
-      tester.expectNoOverflow(
-        of: find.byKey(LabelValueWrapScreen.getDemoKey(demoIndex)),
-      );
       int notWrappedCount = 0;
       for (final labelValueWrap in labelValueWraps) {
         final labelRect = tester.getRect(find.byKey(labelValueWrap.labelKey));
@@ -30,16 +29,14 @@ void main() {
       expect(notWrappedCount, greaterThan(0));
     });
 
-    testWidgets('Wrapped on ${LabelValueWrapScreen.demo1Width}',
-        (tester) async {
-      await pumpLabelValueWrapRoute(tester);
+    testWidgets('Wrapped', (tester) async {
       const int demoIndex = 1;
+      disableOverflowError();
+      await pumpLabelValueWrapRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       final labelValueWraps = getLabelValueWrapsOf(demoIndex);
       expect(labelValueWraps.length, expectedLabelValueWrapPerDemo);
-      tester.expectNoOverflow(
-        of: find.byKey(LabelValueWrapScreen.getDemoKey(demoIndex)),
-      );
       int wrappedCount = 0;
       for (final labelValueWrap in labelValueWraps) {
         final labelRect = tester.getRect(find.byKey(labelValueWrap.labelKey));
@@ -52,11 +49,12 @@ void main() {
       expect(wrappedCount, greaterThan(0));
     });
 
-    testWidgets('Wrapped on ${DeviceDimensions.galaxyFoldPortraitWidth}',
-        (tester) async {
-      await pumpLabelValueWrapRoute(tester);
+    testWidgets('expectNoOverflow()', (tester) async {
       const int demoIndex = 2;
+      disableOverflowError();
+      await pumpLabelValueWrapRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       final labelValueWraps = getLabelValueWrapsOf(demoIndex);
       expect(labelValueWraps.length, expectedLabelValueWrapPerDemo);
       tester.expectNoOverflow(

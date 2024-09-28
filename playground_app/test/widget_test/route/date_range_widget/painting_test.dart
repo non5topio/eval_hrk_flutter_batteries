@@ -1,5 +1,8 @@
+// ignore_for_file: directives_ordering
+
 import 'package:flutter/material.dart';
 
+import 'package:checks/checks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 import 'package:hrk_flutter_test_batteries/hrk_flutter_test_batteries.dart';
@@ -9,10 +12,11 @@ import '../../../src/route/date_range_widget/date_range_widget_route.dart';
 
 void main() {
   group('$DateRangeWidget Painting Test', () {
-    testWidgets('Demo 0, Basic', (tester) async {
+    testWidgets('Basic', (tester) async {
       const int demoIndex = 0;
       await pumpDateRangeWidgetRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       expect(getTitleFinder(demoIndex), findsNothing);
       final startLabelText =
           tester.widget<Text>(getStartLabelFinder(demoIndex));
@@ -27,14 +31,21 @@ void main() {
       expect(endDateText.textAlign, isNull);
     });
 
-    testWidgets('Demo 1, title', (tester) async {
+    testWidgets('title, dateTextDefault', (tester) async {
       const int demoIndex = 1;
       await pumpDateRangeWidgetRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       expect(getTitleFinder(demoIndex), findsOne);
+      Text startDateText = tester.widget<Text>(getStartDateFinder(demoIndex));
+      Text endDateText = tester.widget<Text>(getEndDateFinder(demoIndex));
+      check(startDateText.data)
+          .equals(DateRangeWidgetScreen.customDateTextDefault);
+      check(endDateText.data)
+          .equals(DateRangeWidgetScreen.customDateTextDefault);
     });
 
-    testWidgets('Demo 3, startEndAlign', (tester) async {
+    testWidgets('startEndAlign', (tester) async {
       const int demoIndex = 3;
       await pumpDateRangeWidgetRoute(tester);
       await tapFillAllDatesAction(tester);
@@ -63,19 +74,22 @@ void main() {
       expect(endDateText.textAlign, TextAlign.start);
     });
 
-    testWidgets('Demo 4, expectNoOverflow', (tester) async {
+    testWidgets('expectNoOverflow()', (tester) async {
       const int demoIndex = 4;
+      disableOverflowError();
       await pumpDateRangeWidgetRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       tester.expectNoOverflow(
         of: find.byKey(DateRangeWidgetScreen.getDemoKey(demoIndex)),
       );
     });
 
-    testWidgets('Demo 5, Disabled', (tester) async {
+    testWidgets('Disabled', (tester) async {
       const int demoIndex = 5;
       await pumpDateRangeWidgetRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       final selectButton =
           tester.widget<FilledButton>(getSelectButtonFinder(demoIndex));
       expect(selectButton.enabled, false);

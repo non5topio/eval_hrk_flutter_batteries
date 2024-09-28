@@ -1,3 +1,8 @@
+// ignore_for_file: directives_ordering
+
+import 'package:flutter/widgets.dart';
+
+import 'package:checks/checks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hrk_flutter_batteries/hrk_flutter_batteries.dart';
 
@@ -7,13 +12,29 @@ import '../../playground_app.dart';
 
 final Finder listViewFinder = find.byKey(LabelValueWrapScreen.listViewKey);
 
+Future<void> pumpLabelValueWrapRoute(
+  WidgetTester tester,
+) async {
+  await pumpApp(tester, initialLocation: LabelValueWrapRoute.uri.path);
+}
+
 Future<void> ensureDemoVisible(WidgetTester tester, int demoIndex) async {
   await tester.dragUntilVisible(
-    find.byKey(LabelValueWrapScreen.getDemoKey(demoIndex)),
+    find.byKey(LabelValueWrapScreen.getDemoScaffoldKey(demoIndex)),
     listViewFinder,
     const Offset(0, -200),
   );
   await tester.pumpAndSettle();
+}
+
+Finder getHeaderFinder(int demoIndex) {
+  return find.byKey(LabelValueWrapScreen.getDemoHeaderKey(demoIndex));
+}
+
+void expectHeaderContainsDescription(WidgetTester tester, int demoIndex) {
+  final headerFinder = getHeaderFinder(demoIndex);
+  final headerText = tester.widget<Text>(headerFinder);
+  check(headerText.data!).contains(tester.testDescription);
 }
 
 List<LabelValueWrap> getLabelValueWrapsOf(int demoIndex) {
@@ -25,10 +46,4 @@ List<LabelValueWrap> getLabelValueWrapsOf(int demoIndex) {
       .evaluate()
       .map((e) => e.widget as LabelValueWrap)
       .toList();
-}
-
-Future<void> pumpLabelValueWrapRoute(
-  WidgetTester tester,
-) async {
-  await pumpApp(tester, initialLocation: LabelValueWrapRoute.uri.path);
 }

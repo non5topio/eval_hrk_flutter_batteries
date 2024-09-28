@@ -9,10 +9,11 @@ import '../../../src/route/filter_chip_group/filter_chip_group_route.dart';
 
 void main() {
   group('$FilterChipGroup Painting Test', () {
-    testWidgets('Demo 0, Basic', (tester) async {
+    testWidgets('Basic', (tester) async {
       const int demoIndex = 0;
       await pumpFilterChipGroupRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       expect(getTitleFinder(demoIndex), findsNothing);
       final chipElements = getChipFindersOf(demoIndex).evaluate();
       expect(
@@ -21,10 +22,11 @@ void main() {
       );
     });
 
-    testWidgets('Demo 1, Wrapped', (tester) async {
+    testWidgets('title, wrappped', (tester) async {
       const int demoIndex = 1;
       await pumpFilterChipGroupRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       expect(getTitleFinder(demoIndex), findsOne);
       final chipFinders = getChipFindersOf(demoIndex);
       final firstChipRect = tester.getRect(chipFinders.first);
@@ -32,10 +34,11 @@ void main() {
       expect(firstChipRect.top < lastChipRect.top, true);
     });
 
-    testWidgets('Demo 3, Default selected', (tester) async {
+    testWidgets('Default selected', (tester) async {
       const int demoIndex = 3;
       await pumpFilterChipGroupRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       final chipElements = getChipFindersOf(demoIndex).evaluate().toList();
       for (int i = 0; i < chipElements.length; i++) {
         final chip = chipElements[i].widget as FilterChip;
@@ -46,24 +49,48 @@ void main() {
       }
     });
 
-    testWidgets('Demo 4, expectNoOverflow', (tester) async {
+    testWidgets('expectNoOverflow()', (tester) async {
       const int demoIndex = 4;
+      disableOverflowError();
       await pumpFilterChipGroupRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       tester.expectNoOverflow(
         of: find.byKey(FilterChipGroupScreen.getDemoKey(demoIndex)),
       );
     });
 
-    testWidgets('Demo 5, Disabled', (tester) async {
+    testWidgets('Disabled', (tester) async {
       const int demoIndex = 5;
       await pumpFilterChipGroupRoute(tester);
       await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
       final chipElements = getChipFindersOf(demoIndex).evaluate();
       for (final chipElement in chipElements) {
         final chip = chipElement.widget as FilterChip;
         expect(chip.isEnabled, false);
       }
+    });
+
+    testWidgets('1 FilterChip', (tester) async {
+      const int demoIndex = 8;
+      await pumpFilterChipGroupRoute(tester);
+      await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
+      expect(getTitleFinder(demoIndex), findsOne);
+      final chipElements = getChipFindersOf(demoIndex).evaluate();
+      expect(chipElements.length, 1);
+    });
+
+    testWidgets('Empty title, 0 FilterChip', (tester) async {
+      const int demoIndex = 9;
+      await pumpFilterChipGroupRoute(tester);
+      await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
+      final demoRect = tester.getRect(find.byKey(
+        FilterChipGroupScreen.getDemoKey(demoIndex),
+      ));
+      expect(demoRect.size, Size.zero);
     });
   });
 }

@@ -41,14 +41,14 @@ class FilterChipGroup<T> extends StatelessWidget {
       absorbing: disableInputs,
       child: Column(
         children: [
-          if (title != null)
+          if (title != null && title!.isNotEmpty)
             Text(
               title!,
               key: Key('$keyPrefix$titleKey'),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-          if (title != null) SizedBox(height: spacing),
+          if (title != null && title!.isNotEmpty) SizedBox(height: spacing),
           _getFilterChips(context)
         ],
       ),

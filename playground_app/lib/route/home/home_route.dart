@@ -7,6 +7,7 @@ import '../../constants/labels.dart';
 import '../about/about_route.dart';
 import '../about/license/license_route.dart';
 import '../choice_chip_group/choice_chip_group_route.dart';
+import '../choice_chip_input_widget/choice_chip_input_widget_route.dart';
 import '../date_range_widget/date_range_widget_route.dart';
 import '../filter_chip_group/filter_chip_group_route.dart';
 import '../label_link_inkwell_wrap/label_link_inkwell_wrap_route.dart';
@@ -33,6 +34,10 @@ part 'home_route.g.dart';
           name: LicenseRoute.displayName,
         )
       ],
+    ),
+    TypedGoRoute<ChoiceChipInputWidgetRoute>(
+      path: ChoiceChipInputWidgetRoute.pathSegment,
+      name: ChoiceChipInputWidgetRoute.displayName,
     ),
     TypedGoRoute<DateRangeWidgetRoute>(
       path: DateRangeWidgetRoute.pathSegment,

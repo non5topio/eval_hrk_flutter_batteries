@@ -49,6 +49,7 @@ dev_dependencies:
   freezed: ^2.5.7
   json_serializable: ^6.8.0
   hrk_test_batteries: '>=0.1.0-pre.1 <1.0.0'
+  flutter_keyboard_visibility: ^6.0.0
 
 dependency_overrides:
   hrk_flutter_batteries:

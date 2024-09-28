@@ -33,6 +33,11 @@ RouteBase get $homeRoute => GoRouteData.$route(
           ],
         ),
         GoRouteData.$route(
+          path: 'choice-chip-input-widget',
+          name: 'ChoiceChipInputWidget',
+          factory: $ChoiceChipInputWidgetRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'date-range-widget',
           name: 'DateRangeWidget',
           factory: $DateRangeWidgetRouteExtension._fromState,
@@ -126,6 +131,28 @@ extension $LicenseRouteExtension on LicenseRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ChoiceChipInputWidgetRouteExtension on ChoiceChipInputWidgetRoute {
+  static ChoiceChipInputWidgetRoute _fromState(GoRouterState state) =>
+      ChoiceChipInputWidgetRoute(
+        $extra: state.extra as Map<String, dynamic>?,
+      );
+
+  String get location => GoRouteData.$location(
+        '/choice-chip-input-widget',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }
 
 extension $DateRangeWidgetRouteExtension on DateRangeWidgetRoute {

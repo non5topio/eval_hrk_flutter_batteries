@@ -96,7 +96,8 @@
     "theme",
     "light",
     "dark",
-    "space"
+    "space",
+    "name"
   ],
 
   "he": [
@@ -196,6 +197,7 @@
     "theme",
     "light",
     "dark",
-    "space"
+    "space",
+    "name"
   ]
 }

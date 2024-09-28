@@ -6,38 +6,47 @@ import '../../../src/route/label_link_inkwell_wrap/label_link_inkwell_wrap_route
 
 void main() {
   group('$LabelLinkInkWellWrap Painting Test', () {
-    testWidgets('Not wrapped', (tester) async {
+    testWidgets('Basic', (tester) async {
+      int demoIndex = 0;
       await pumpLabelLinkInkWellWrapRoute(tester);
-      final labelRect = tester.getRect(
-        find.byKey(LabelLinkInkWellWrapScreen.demo1LabelKey),
-      );
-      final linkRect = tester.getRect(
-        find.byKey(LabelLinkInkWellWrapScreen.demo1LinkKey),
-      );
+      await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
+      final labelRect = tester.getRect(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLabelKey(demoIndex),
+      ));
+      final linkRect = tester.getRect(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLinkKey(demoIndex),
+      ));
       expect(labelRect.top == linkRect.top, true);
       expect(labelRect.height == linkRect.height, true);
     });
 
     testWidgets('Wrapped in two lines', (tester) async {
+      int demoIndex = 1;
       await pumpLabelLinkInkWellWrapRoute(tester);
-      final labelRect = tester.getRect(
-        find.byKey(LabelLinkInkWellWrapScreen.demo2LabelKey),
-      );
-      final linkRect = tester.getRect(
-        find.byKey(LabelLinkInkWellWrapScreen.demo2LinkKey),
-      );
+      await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
+      final labelRect = tester.getRect(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLabelKey(demoIndex),
+      ));
+      final linkRect = tester.getRect(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLinkKey(demoIndex),
+      ));
       expect(labelRect.top < linkRect.top, true);
       expect(labelRect.height == linkRect.height, true);
     });
 
     testWidgets('Wrapped in three lines', (tester) async {
+      int demoIndex = 2;
       await pumpLabelLinkInkWellWrapRoute(tester);
-      final labelRect = tester.getRect(
-        find.byKey(LabelLinkInkWellWrapScreen.demo3LabelKey),
-      );
-      final linkRect = tester.getRect(
-        find.byKey(LabelLinkInkWellWrapScreen.demo3LinkKey),
-      );
+      await ensureDemoVisible(tester, demoIndex);
+      expectHeaderContainsDescription(tester, demoIndex);
+      final labelRect = tester.getRect(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLabelKey(demoIndex),
+      ));
+      final linkRect = tester.getRect(find.byKey(
+        LabelLinkInkWellWrapScreen.getDemoLinkKey(demoIndex),
+      ));
       expect(labelRect.top < linkRect.top, true);
       expect(labelRect.height == linkRect.height / 2, true);
     });

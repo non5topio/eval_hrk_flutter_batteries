@@ -64,6 +64,14 @@ class FilterChipGroupScreen extends StatefulWidget {
     return '$demoKeyPrefix${index}_';
   }
 
+  static Key getDemoScaffoldKey(int index) {
+    return Key('${getDemoKeyPrefix(index)}_scaffold_key');
+  }
+
+  static Key getDemoHeaderKey(int index) {
+    return Key('${getDemoKeyPrefix(index)}_header_key');
+  }
+
   static Key getDemoKey(int index) {
     return Key('${getDemoKeyPrefix(index)}key');
   }
@@ -78,6 +86,8 @@ class _FilterChipGroupScreenState extends State<FilterChipGroupScreen> {
   Set<CloseApproachBody> demo5SelectionSet = {};
   Set<CloseApproachBody> demo6SelectionSet = {};
   Set<CloseApproachBody> demo7SelectionSet = {};
+  Set<CloseApproachBody> demo8SelectionSet = {};
+  Set<CloseApproachBody> demo9SelectionSet = {};
 
   @override
   void initState() {
@@ -85,7 +95,6 @@ class _FilterChipGroupScreenState extends State<FilterChipGroupScreen> {
     demo3SelectionSet = Set.from(FilterChipGroupScreen.defaultSelectionSet);
     demo4SelectionSet = Set.from(FilterChipGroupScreen.defaultSelectionSet);
     demo5SelectionSet = Set.from(FilterChipGroupScreen.defaultSelectionSet);
-    demo6SelectionSet = Set.from(FilterChipGroupScreen.closeApproachBodySet);
     demo6SelectionSet = Set.from(FilterChipGroupScreen.closeApproachBodySet);
     demo7SelectionSet = Set.from(FilterChipGroupScreen.closeApproachBodySet);
   }
@@ -118,20 +127,23 @@ class _FilterChipGroupScreenState extends State<FilterChipGroupScreen> {
   }
 
   List<Widget> _getSliverBody({required BuildContext context}) {
+    int demoIndex = 0;
     return [
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: HrkDimensions.pageMarginVerticalHalf,
         ),
       ),
-      _getDemo0(context: context),
-      _getDemo1(context: context),
-      _getDemo2(context: context),
-      _getDemo3(context: context),
-      _getDemo4(context: context),
-      _getDemo5(context: context),
-      _getDemo6(context: context),
-      _getDemo7(context: context),
+      _getDemo0(context: context, demoIndex: demoIndex++),
+      _getDemo1(context: context, demoIndex: demoIndex++),
+      _getDemo2(context: context, demoIndex: demoIndex++),
+      _getDemo3(context: context, demoIndex: demoIndex++),
+      _getDemo4(context: context, demoIndex: demoIndex++),
+      _getDemo5(context: context, demoIndex: demoIndex++),
+      _getDemo6(context: context, demoIndex: demoIndex++),
+      _getDemo7(context: context, demoIndex: demoIndex++),
+      _getDemo8(context: context, demoIndex: demoIndex++),
+      _getDemo9(context: context, demoIndex: demoIndex++),
       const SliverPadding(
         padding: EdgeInsets.only(
           bottom: HrkDimensions.pageMarginVerticalHalf,
@@ -140,25 +152,80 @@ class _FilterChipGroupScreenState extends State<FilterChipGroupScreen> {
     ];
   }
 
-  // Basic
-  Widget _getDemo0({required BuildContext context}) {
-    int demoIndex = 0;
+  Widget _getDemoScaffold({
+    required BuildContext context,
+    required int demoIndex,
+    required String demoHeader,
+    required Widget demoWidget,
+  }) {
     return SliverPadding(
+      key: FilterChipGroupScreen.getDemoScaffoldKey(demoIndex),
       padding: const EdgeInsets.symmetric(
         horizontal: HrkDimensions.pageMarginHorizontal,
         vertical: HrkDimensions.pageMarginVerticalHalf,
       ),
       sliver: SliverToBoxAdapter(
+        child: Column(
+          children: [
+            Text(
+              demoHeader,
+              key: FilterChipGroupScreen.getDemoHeaderKey(demoIndex),
+              style: _getDemoHeaderTextStyle(context: context),
+            ),
+            const SizedBox(height: HrkDimensions.bodyItemSpacing),
+            demoWidget,
+          ],
+        ),
+      ),
+    );
+  }
+
+  TextStyle _getDemoHeaderTextStyle({required BuildContext context}) {
+    final theme = Theme.of(context);
+    return theme.textTheme.bodyMedium!.copyWith(
+      color: theme.colorScheme.tertiary,
+    );
+  }
+
+  Widget _getDemo0({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Basic',
+      demoWidget: FilterChipGroup<CloseApproachBody>(
+        key: FilterChipGroupScreen.getDemoKey(demoIndex),
+        keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+        values: FilterChipGroupScreen.closeApproachBodySet,
+        labels: widget.demoLabels,
+        keys: widget.demoKeys,
+        selectedSet: demo0SelectionSet,
+        onChipsSelected: (selectedSet) {
+          setState(() {
+            demo0SelectionSet = selectedSet;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _getDemo1({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'title, wrappped',
+      demoWidget: SizedBox(
+        width: HrkDimensions.bodyItemContentWidth,
         child: FilterChipGroup<CloseApproachBody>(
           key: FilterChipGroupScreen.getDemoKey(demoIndex),
           keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
           values: FilterChipGroupScreen.closeApproachBodySet,
           labels: widget.demoLabels,
           keys: widget.demoKeys,
-          selectedSet: demo0SelectionSet,
+          selectedSet: demo1SelectionSet,
           onChipsSelected: (selectedSet) {
             setState(() {
-              demo0SelectionSet = selectedSet;
+              demo1SelectionSet = selectedSet;
             });
           },
         ),
@@ -166,226 +233,197 @@ class _FilterChipGroupScreenState extends State<FilterChipGroupScreen> {
     );
   }
 
-  // title
-  Widget _getDemo1({required BuildContext context}) {
-    int demoIndex = 1;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
+  Widget _getDemo2({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'BodyItemContainer',
+      demoWidget: BodyItemContainer(
+        child: FilterChipGroup<CloseApproachBody>(
+          key: FilterChipGroupScreen.getDemoKey(demoIndex),
+          keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          values: FilterChipGroupScreen.closeApproachBodySet,
+          labels: widget.demoLabels,
+          keys: widget.demoKeys,
+          selectedSet: demo2SelectionSet,
+          onChipsSelected: (selectedSet) {
+            setState(() {
+              demo2SelectionSet = selectedSet;
+            });
+          },
+        ),
       ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: SizedBox(
-            width: HrkDimensions.bodyItemContentWidth,
-            child: FilterChipGroup<CloseApproachBody>(
-              key: FilterChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              values: FilterChipGroupScreen.closeApproachBodySet,
-              labels: widget.demoLabels,
-              keys: widget.demoKeys,
-              selectedSet: demo1SelectionSet,
-              onChipsSelected: (selectedSet) {
-                setState(() {
-                  demo1SelectionSet = selectedSet;
-                });
-              },
-            ),
+    );
+  }
+
+  Widget _getDemo3({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Default selected',
+      demoWidget: BodyItemContainer(
+        child: FilterChipGroup<CloseApproachBody>(
+          key: FilterChipGroupScreen.getDemoKey(demoIndex),
+          keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          values: FilterChipGroupScreen.closeApproachBodySet,
+          labels: widget.demoLabels,
+          keys: widget.demoKeys,
+          selectedSet: demo3SelectionSet,
+          onChipsSelected: (selectedSet) {
+            setState(() {
+              demo3SelectionSet = selectedSet;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _getDemo4({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'expectNoOverflow()',
+      demoWidget: SizedBox(
+        width: DeviceDimensions.galaxyFoldPortraitWidth -
+            (HrkDimensions.pageMarginHorizontal * 2),
+        child: BodyItemContainer(
+          child: FilterChipGroup<CloseApproachBody>(
+            key: FilterChipGroupScreen.getDemoKey(demoIndex),
+            keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+            title: widget.l10n.demoIndex(demoIndex),
+            values: FilterChipGroupScreen.closeApproachBodySet,
+            labels: widget.demoLabels,
+            keys: widget.demoKeys,
+            selectedSet: demo4SelectionSet,
+            onChipsSelected: (selectedSet) {
+              setState(() {
+                demo4SelectionSet = selectedSet;
+              });
+            },
           ),
         ),
       ),
     );
   }
 
-  // BodyItemContainer
-  Widget _getDemo2({required BuildContext context}) {
-    int demoIndex = 2;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: FilterChipGroup<CloseApproachBody>(
-              key: FilterChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              values: FilterChipGroupScreen.closeApproachBodySet,
-              labels: widget.demoLabels,
-              keys: widget.demoKeys,
-              selectedSet: demo2SelectionSet,
-              onChipsSelected: (selectedSet) {
-                setState(() {
-                  demo2SelectionSet = selectedSet;
-                });
-              },
-            ),
-          ),
+  Widget _getDemo5({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Disabled',
+      demoWidget: BodyItemContainer(
+        child: FilterChipGroup<CloseApproachBody>(
+          key: FilterChipGroupScreen.getDemoKey(demoIndex),
+          keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          enabled: false,
+          title: widget.l10n.demoIndex(demoIndex),
+          values: FilterChipGroupScreen.closeApproachBodySet,
+          labels: widget.demoLabels,
+          keys: widget.demoKeys,
+          selectedSet: demo5SelectionSet,
+          onChipsSelected: (selectedSet) {
+            setState(() {
+              demo5SelectionSet = selectedSet;
+            });
+          },
         ),
       ),
     );
   }
 
-  // Default selected
-  Widget _getDemo3({required BuildContext context}) {
-    int demoIndex = 3;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: FilterChipGroup<CloseApproachBody>(
-              key: FilterChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              values: FilterChipGroupScreen.closeApproachBodySet,
-              labels: widget.demoLabels,
-              keys: widget.demoKeys,
-              selectedSet: demo3SelectionSet,
-              onChipsSelected: (selectedSet) {
-                setState(() {
-                  demo3SelectionSet = selectedSet;
-                });
-              },
-            ),
-          ),
+  Widget _getDemo6({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'disableInputs',
+      demoWidget: BodyItemContainer(
+        child: FilterChipGroup<CloseApproachBody>(
+          key: FilterChipGroupScreen.getDemoKey(demoIndex),
+          keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          values: FilterChipGroupScreen.closeApproachBodySet,
+          labels: widget.demoLabels,
+          keys: widget.demoKeys,
+          selectedSet: demo6SelectionSet,
+          disableInputs: true,
+          onChipsSelected: (selectedSet) {
+            setState(() {
+              demo6SelectionSet = selectedSet;
+            });
+          },
         ),
       ),
     );
   }
 
-  // expectNoOverflow
-  Widget _getDemo4({required BuildContext context}) {
-    int demoIndex = 4;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: SizedBox(
-            width: DeviceDimensions.galaxyFoldPortraitWidth -
-                (HrkDimensions.pageMarginHorizontal * 2),
-            child: BodyItemContainer(
-              child: FilterChipGroup<CloseApproachBody>(
-                key: FilterChipGroupScreen.getDemoKey(demoIndex),
-                keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
-                title: widget.l10n.demoIndex(demoIndex),
-                values: FilterChipGroupScreen.closeApproachBodySet,
-                labels: widget.demoLabels,
-                keys: widget.demoKeys,
-                selectedSet: demo4SelectionSet,
-                onChipsSelected: (selectedSet) {
-                  setState(() {
-                    demo4SelectionSet = selectedSet;
-                  });
-                },
-              ),
-            ),
-          ),
+  Widget _getDemo7({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'All selected',
+      demoWidget: BodyItemContainer(
+        child: FilterChipGroup<CloseApproachBody>(
+          key: FilterChipGroupScreen.getDemoKey(demoIndex),
+          keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          values: FilterChipGroupScreen.closeApproachBodySet,
+          labels: widget.demoLabels,
+          keys: widget.demoKeys,
+          selectedSet: demo7SelectionSet,
+          onChipsSelected: (selectedSet) {
+            setState(() {
+              demo7SelectionSet = selectedSet;
+            });
+          },
         ),
       ),
     );
   }
 
-  // Disabled
-  Widget _getDemo5({required BuildContext context}) {
-    int demoIndex = 5;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: FilterChipGroup<CloseApproachBody>(
-              key: FilterChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              enabled: false,
-              title: widget.l10n.demoIndex(demoIndex),
-              values: FilterChipGroupScreen.closeApproachBodySet,
-              labels: widget.demoLabels,
-              keys: widget.demoKeys,
-              selectedSet: demo5SelectionSet,
-              onChipsSelected: (selectedSet) {
-                setState(() {
-                  demo5SelectionSet = selectedSet;
-                });
-              },
-            ),
-          ),
+  Widget _getDemo8({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: '1 FilterChip',
+      demoWidget: BodyItemContainer(
+        child: FilterChipGroup<CloseApproachBody>(
+          key: FilterChipGroupScreen.getDemoKey(demoIndex),
+          keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+          title: widget.l10n.demoIndex(demoIndex),
+          values: {FilterChipGroupScreen.closeApproachBodySet.first},
+          labels: {widget.demoLabels.first},
+          keys: {widget.demoKeys.first},
+          selectedSet: demo8SelectionSet,
+          onChipsSelected: (selectedSet) {
+            setState(() {
+              demo8SelectionSet = selectedSet;
+            });
+          },
         ),
       ),
     );
   }
 
-  // disableInputs
-  Widget _getDemo6({required BuildContext context}) {
-    int demoIndex = 6;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: FilterChipGroup<CloseApproachBody>(
-              key: FilterChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              values: FilterChipGroupScreen.closeApproachBodySet,
-              labels: widget.demoLabels,
-              keys: widget.demoKeys,
-              selectedSet: demo6SelectionSet,
-              disableInputs: true,
-              onChipsSelected: (selectedSet) {
-                setState(() {
-                  demo6SelectionSet = selectedSet;
-                });
-              },
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // All selected,
-  Widget _getDemo7({required BuildContext context}) {
-    int demoIndex = 7;
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HrkDimensions.pageMarginHorizontal,
-        vertical: HrkDimensions.pageMarginVerticalHalf,
-      ),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: BodyItemContainer(
-            child: FilterChipGroup<CloseApproachBody>(
-              key: FilterChipGroupScreen.getDemoKey(demoIndex),
-              keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
-              title: widget.l10n.demoIndex(demoIndex),
-              values: FilterChipGroupScreen.closeApproachBodySet,
-              labels: widget.demoLabels,
-              keys: widget.demoKeys,
-              selectedSet: demo7SelectionSet,
-              onChipsSelected: (selectedSet) {
-                setState(() {
-                  demo7SelectionSet = selectedSet;
-                });
-              },
-            ),
-          ),
-        ),
+  Widget _getDemo9({required BuildContext context, required int demoIndex}) {
+    return _getDemoScaffold(
+      context: context,
+      demoIndex: demoIndex,
+      demoHeader: 'Empty title, 0 FilterChip',
+      demoWidget: FilterChipGroup<CloseApproachBody>(
+        key: FilterChipGroupScreen.getDemoKey(demoIndex),
+        keyPrefix: FilterChipGroupScreen.getDemoKeyPrefix(demoIndex),
+        title: '',
+        values: const {},
+        labels: const {},
+        selectedSet: demo9SelectionSet,
+        onChipsSelected: (selectedSet) {
+          setState(() {
+            demo9SelectionSet = selectedSet;
+          });
+        },
       ),
     );
   }
