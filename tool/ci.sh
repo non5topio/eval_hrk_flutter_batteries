@@ -17,5 +17,6 @@ git diff --stat
 git --no-pager diff
 if flutter --version | grep -q "channel stable" &> /dev/null; then
   git diff --exit-code  --quiet \
-    ':(exclude)playground_app/.metadata'
+    ':(exclude)playground_app/.metadata' \
+    ':(exclude)*.mocks.dart'
 fi
