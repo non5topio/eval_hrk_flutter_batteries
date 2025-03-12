@@ -1,6 +1,6 @@
 {
     "increase-coverage": {
-      "project-name": "hrk_flutter_package",
+      "project-name": "eval_hrk_flutter_package",
       "test-env-docker-stage": "ci-dependencies",
       "build-test-env-docker-stage-script-path": "tool/build-test-env-docker-stage.sh",
       "test-files-folders": [
