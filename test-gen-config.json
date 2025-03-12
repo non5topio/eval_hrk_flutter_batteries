@@ -9,8 +9,8 @@
       ],
       "source-test-file-paths": [
         {
-          "source-file-path": "lib/src/json_converter/locale_json_converter.dart",
-          "test-file-path": "test/unit_test/json_converter/locale_json_converter_test.dart"
+          "source-file-path": "lib/src/json_converter/locale_json_converter_2.dart",
+          "test-file-path": "test/unit_test/json_converter/locale_json_converter_2_test.dart"
         }
       ],
       "code-coverage-report-path": "coverage/lcov.info",
