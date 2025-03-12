@@ -1,6 +1,10 @@
 {
+    "enabled": "true",
     "increase-coverage": {
-      "project-name": "eval_hrk_flutter_package",
+      "project-name": "eval_hrk_flutter_batteries",
+      "target-branches": [
+      "main"
+      ],  
       "test-env-docker-stage": "ci-dependencies",
       "build-test-env-docker-stage-script-path": "tool/build-test-env-docker-stage.sh",
       "test-files-folders": [
@@ -9,13 +13,15 @@
       ],
       "source-test-file-paths": [
         {
-          "source-file-path": "lib/src/json_converter/locale_json_converter.dart",
-          "test-file-path": "test/unit_test/json_converter/locale_json_converter_test.dart"
+          "source-file-path": "lib/src/json_converter/locale_json_converter_2.dart",
+          "test-file-path": "test/unit_test/json_converter/locale_json_converter_2_test.dart"
         }
       ],
-      "code-coverage-report-path": "coverage/lcov.info",
       "test-command": "flutter test --coverage",
       "coverage-type": "lcov",
-      "desired-coverage": 100
+      "code-coverage-report-path": "coverage/lcov.info",
+      "desired-coverage": 100,
+      "max-iterations": 2,
+      "max-number-of-test-cases": 6
     }
   }
