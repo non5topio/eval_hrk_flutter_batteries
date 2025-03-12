@@ -1,7 +1,7 @@
 {
     "enabled": "true",
     "increase-coverage": {
-      "project-name": "eval_hrk_flutter_package",
+      "project-name": "eval_hrk_flutter_batteries",
       "target-branches": [
       "main"
       ],  
