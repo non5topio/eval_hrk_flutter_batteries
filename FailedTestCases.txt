@@ -1,0 +1,180 @@
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  final Locale locale = converter.fromJson(json);
+  expect(locale.languageCode, '');
+  expect(locale.scriptCode, isNull);
+  expect(locale.countryCode, isNull);
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  final Locale locale = converter.fromJson(json);
+  expect(locale.languageCode, '');
+  expect(locale.scriptCode, isNull);
+  expect(locale.countryCode, isNull);
+});
+
+
+
+test('Locale with empty strings', () {
+  const locale = Locale.fromSubtags(languageCode: '', scriptCode: '', countryCode: '');
+  final JsonMap json = converter.toJson(locale);
+  expect(json['languageCode'], '');
+  expect(json['scriptCode'], '');
+  expect(json['countryCode'], '');
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  final Locale locale = converter.fromJson(json);
+  expect(locale.languageCode, '');
+  expect(locale.scriptCode, isNull);
+  expect(locale.countryCode, isNull);
+});
+
+
+
+test('Locale with empty strings', () {
+  const locale = Locale.fromSubtags(languageCode: '', scriptCode: '', countryCode: '');
+  final JsonMap json = converter.toJson(locale);
+  expect(json['languageCode'], '');
+  expect(json['scriptCode'], '');
+  expect(json['countryCode'], '');
+});
+
+
+
+test('missing languageCode', () {
+  final JsonMap json = {'scriptCode': 'Latn', 'countryCode': 'US'};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  final Locale locale = converter.fromJson(json);
+  expect(locale.languageCode, '');
+  expect(locale.scriptCode, isNull);
+  expect(locale.countryCode, isNull);
+});
+
+
+
+test('Locale with empty strings', () {
+  const locale = Locale.fromSubtags(languageCode: '', scriptCode: '', countryCode: '');
+  final JsonMap json = converter.toJson(locale);
+  expect(json['languageCode'], '');
+  expect(json['scriptCode'], '');
+  expect(json['countryCode'], '');
+});
+
+
+
+test('missing languageCode', () {
+  final JsonMap json = {'scriptCode': 'Latn', 'countryCode': 'US'};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  final Locale locale = converter.fromJson(json);
+  expect(locale.languageCode, '');
+  expect(locale.scriptCode, isNull);
+  expect(locale.countryCode, isNull);
+});
+
+
+
+test('Locale with empty strings', () {
+  const locale = Locale.fromSubtags(languageCode: '', scriptCode: '', countryCode: '');
+  final JsonMap json = converter.toJson(locale);
+  expect(json['languageCode'], '');
+  expect(json['scriptCode'], '');
+  expect(json['countryCode'], '');
+});
+
+
+
+test('missing languageCode', () {
+  final JsonMap json = {'scriptCode': 'Latn', 'countryCode': 'US'};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('missing languageCode', () {
+  final JsonMap json = {'countryCode': 'US'};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  final Locale locale = converter.fromJson(json);
+  expect(locale.languageCode, '');
+  expect(locale.scriptCode, isNull);
+  expect(locale.countryCode, isNull);
+});
+
+
+
+test('Locale with empty strings', () {
+  const locale = Locale.fromSubtags(languageCode: '', scriptCode: '', countryCode: '');
+  final JsonMap json = converter.toJson(locale);
+  expect(json['languageCode'], '');
+  expect(json['scriptCode'], '');
+  expect(json['countryCode'], '');
+});
+
+
+
+test('missing languageCode', () {
+  final JsonMap json = {'scriptCode': 'Latn', 'countryCode': 'US'};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('empty JsonMap', () {
+  final JsonMap json = {};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('missing languageCode', () {
+  final JsonMap json = {'countryCode': 'US'};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
+
+test('script injection in JsonMap', () {
+  final JsonMap json = {'languageCode': '<script>alert(1)</script>'};
+  expect(() => converter.fromJson(json), throwsA(isA<AssertionError>()));
+});
+
+
