@@ -42,4 +42,5 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 FROM ci-dependencies AS ci-increase-coverage
+ENV DYNACONF_TESTS__MAX_ALLOWED_RUNTIME_SECONDS=1800
 RUN ./tool/ci-increase-coverage.sh
