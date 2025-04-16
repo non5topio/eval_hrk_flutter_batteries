@@ -60,6 +60,191 @@ void main() {
       testConverter(locale, json);
     });
 
+    test('toJson and fromJson handle Locale with language and script codes only', () {
+      const locale = Locale.fromSubtags(
+        languageCode: 'zh',
+        scriptCode: 'Hans',
+      );
+      // countryCode should be absent in the JSON
+      const JsonMap json = {'languageCode': 'zh', 'scriptCode': 'Hans'};
+      testConverter(locale, json); // Uses the existing helper for full round trip check
+    
+      // Explicit check for toJson structure after helper call
+      const converter = LocaleJsonConverter2();
+      final convertedJson = converter.toJson(locale);
+      expect(convertedJson.containsKey('countryCode'), isFalse);
+    });
+
+
+    test('fromJson throws error for null languageCode value', () {
+      const converter = LocaleJsonConverter2();
+      const JsonMap json = {'languageCode': null, 'scriptCode': 'Latn', 'countryCode': 'US'};
+      // Passing null as languageCode to Locale.fromSubtags results in a TypeError.
+      expect(() => converter.fromJson(json), throwsA(isA<TypeError>()));
+    });
+
+
+    test('fromJson throws error for empty JSON map', () {
+      const converter = LocaleJsonConverter2();
+      const JsonMap json = {};
+      // Accessing json['languageCode'] yields null. Locale.fromSubtags requires
+      // a non-null languageCode, leading to a TypeError.
+      expect(() => converter.fromJson(json), throwsA(isA<TypeError>()));
+    });
+
+
+    test('fromJson throws error for mixed-case keys', () {
+      const converter = LocaleJsonConverter2();
+      const JsonMap json = {'LanguageCode': 'fr', 'SCRIPTCODE': 'Latn', 'countrycode': 'CA'};
+      // Accessing json['languageCode'] will return null because the key case doesn't match.
+      // Locale.fromSubtags requires a non-null languageCode, leading to a TypeError.
+      expect(() => converter.fromJson(json), throwsA(isA<TypeError>()));
+    });
+
+
+    test('fromJson ignores extra keys and toJson only includes standard keys', () {
+      const converter = LocaleJsonConverter2();
+      const JsonMap jsonWithExtra = {
+        'languageCode': 'en',
+        'scriptCode': 'Latn',
+        'countryCode': 'US',
+        'extraKey': 'value',
+        'anotherKey': 123
+      };
+      const expectedLocale = Locale.fromSubtags(
+        languageCode: 'en',
+        scriptCode: 'Latn',
+        countryCode: 'US',
+      );
+      const expectedJson = {
+        'languageCode': 'en',
+        'scriptCode': 'Latn',
+        'countryCode': 'US',
+      };
+    
+      // Test fromJson ignores extra keys
+      final Locale locale = converter.fromJson(jsonWithExtra);
+      expect(locale, expectedLocale);
+    
+      // Test toJson only includes standard keys
+      final JsonMap json = converter.toJson(locale);
+      expect(json, expectedJson);
+      expect(json.containsKey('extraKey'), isFalse);
+      expect(json.containsKey('anotherKey'), isFalse);
+    });
+
+
+    test('fromJson and toJson handle potential XSS strings literally', () {
+      const converter = LocaleJsonConverter2();
+      const xssString = '<script>alert("XSS")</script>';
+      const locale = Locale.fromSubtags(
+        languageCode: xssString,
+        scriptCode: 'Latn',
+        countryCode: 'US',
+      );
+      const JsonMap json = {
+        'languageCode': xssString,
+        'scriptCode': 'Latn',
+        'countryCode': 'US',
+      };
+    
+      // Use existing helper for round trip validation
+      final JsonMap convertedJson = converter.toJson(locale);
+      expect(convertedJson, json);
+      final Locale roundTripLocale = converter.fromJson(convertedJson);
+      expect(roundTripLocale, locale);
+      final Locale convertedLocale = converter.fromJson(json);
+      expect(convertedLocale, locale);
+      final JsonMap roundTripJson = converter.toJson(convertedLocale);
+      expect(roundTripJson, json);
+    
+      // Explicitly check values after conversion
+      expect(convertedLocale.languageCode, xssString);
+      expect(convertedLocale.scriptCode, 'Latn');
+      expect(convertedLocale.countryCode, 'US');
+      expect(convertedJson['languageCode'], xssString);
+    });
+
+
+    test('toJson and fromJson handle Locale with language and script codes only', () {
+      const converter = LocaleJsonConverter2();
+      const locale = Locale.fromSubtags(
+        languageCode: 'zh',
+        scriptCode: 'Hans',
+      );
+      // countryCode should be absent in the JSON
+      const JsonMap json = {'languageCode': 'zh', 'scriptCode': 'Hans'};
+    
+      // Use existing helper for round trip validation
+      final JsonMap convertedJson = converter.toJson(locale);
+      expect(convertedJson, json);
+      final Locale roundTripLocale = converter.fromJson(convertedJson);
+      expect(roundTripLocale, locale);
+      final Locale convertedLocale = converter.fromJson(json);
+      expect(convertedLocale, locale);
+      final JsonMap roundTripJson = converter.toJson(convertedLocale);
+      expect(roundTripJson, json);
+    
+      // Explicit check for toJson structure
+      expect(convertedJson.containsKey('countryCode'), isFalse);
+      // Explicit check for fromJson result properties
+      expect(convertedLocale.languageCode, 'zh');
+      expect(convertedLocale.scriptCode, 'Hans');
+      expect(convertedLocale.countryCode, isNull);
+    });
+
+
+    test('fromJson ignores extra keys and toJson only includes standard keys', () {
+      const converter = LocaleJsonConverter2();
+      const JsonMap jsonWithExtra = {
+        'languageCode': 'en',
+        'scriptCode': 'Latn',
+        'countryCode': 'US',
+        'extraKey': 'value',
+        'anotherKey': 123
+      };
+      const expectedLocale = Locale.fromSubtags(
+        languageCode: 'en',
+        scriptCode: 'Latn',
+        countryCode: 'US',
+      );
+      const expectedJson = {
+        'languageCode': 'en',
+        'scriptCode': 'Latn',
+        'countryCode': 'US',
+      };
+    
+      // Test fromJson ignores extra keys
+      final Locale locale = converter.fromJson(jsonWithExtra);
+      expect(locale, expectedLocale);
+    
+      // Test toJson only includes standard keys
+      final JsonMap json = converter.toJson(locale);
+      expect(json, expectedJson);
+      expect(json.containsKey('extraKey'), isFalse);
+      expect(json.containsKey('anotherKey'), isFalse);
+    });
+
+
+    test('fromJson throws error for invalid data types', () {
+      const converter = LocaleJsonConverter2();
+      const JsonMap json = {'languageCode': 123, 'scriptCode': true, 'countryCode': []};
+      // Locale.fromSubtags expects String arguments. Providing other types
+      // will result in a TypeError during the call.
+      expect(() => converter.fromJson(json), throwsA(isA<TypeError>()));
+    });
+
+
+    test('fromJson throws error when languageCode is missing', () {
+      const converter = LocaleJsonConverter2();
+      const JsonMap json = {'scriptCode': 'Latn', 'countryCode': 'US'};
+      // Locale.fromSubtags requires a non-null languageCode.
+      // Accessing json['languageCode'] yields null, leading to a TypeError
+      // when Locale.fromSubtags attempts to use it.
+      expect(() => converter.fromJson(json), throwsA(isA<TypeError>()));
+    });
+
+
     // test('SQL injection attempt in languageCode', () {
     //   final JsonMap json = {'languageCode': 'en; DROP TABLE users;', 'scriptCode': 'Latn', 'countryCode': 'US'};
     //   final Locale locale = converter.fromJson(json);
