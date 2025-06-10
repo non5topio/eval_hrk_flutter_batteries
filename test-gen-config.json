@@ -17,6 +17,6 @@
       "test-command": "flutter test --coverage",
       "coverage-type": "lcov",
       "desired-coverage": 100,
-      "max-iterations": 1
+      "max-iterations": 2
     }
   }
