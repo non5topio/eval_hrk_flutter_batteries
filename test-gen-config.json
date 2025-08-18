@@ -1,4 +1,5 @@
 {
+    "enabled": "true",
     "increase-coverage": {
       "project-name": "eval_hrk_flutter_package",
       "test-env-docker-stage": "ci-dependencies",
