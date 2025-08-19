@@ -35,6 +35,7 @@ FROM app-dependencies AS app
 COPY . .
 
 FROM app AS ci-dependencies
+ENV DYNACONF_TESTS__MAX_ALLOWED_RUNTIME_SECONDS=1800
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
@@ -42,4 +43,5 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 FROM ci-dependencies AS ci-increase-coverage
+# ENV DYNACONF_TESTS__MAX_ALLOWED_RUNTIME_SECONDS=1800
 RUN ./tool/ci-increase-coverage.sh
