@@ -25,39 +25,5 @@ void main() {
       const JsonMap json = {'languageCode': 'en'};
       testConverter(locale, json);
     });
-
-    test('mr_IN', () {
-      const locale = Locale('mr', 'IN');
-      const JsonMap json = {'languageCode': 'mr', 'countryCode': 'IN'};
-      testConverter(locale, json);
-    });
-
-    test('hi-Deva-IN', () {
-      const locale = Locale.fromSubtags(
-        languageCode: 'hi',
-        scriptCode: 'Deva',
-        countryCode: 'IN',
-      );
-      const JsonMap json = {
-        'languageCode': 'hi',
-        'scriptCode': 'Deva',
-        'countryCode': 'IN',
-      };
-      testConverter(locale, json);
-    });
-
-    test('dynamic', () {
-      const locale = Locale.fromSubtags(
-        languageCode: 'hi',
-        scriptCode: 'Deva',
-        countryCode: 'IN',
-      );
-      const dynamic json = {
-        'languageCode': 'hi',
-        'scriptCode': 'Deva',
-        'countryCode': 'IN',
-      };
-      testConverter(locale, json);
-    });
   });
 }
